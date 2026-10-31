@@ -7,10 +7,12 @@
     "styles": "sass src/styles.scss src/generated.css --no-source-map && sass src/services.scss public/services.css --no-source-map && sass src/services-billboard.scss public/services-billboard.css --no-source-map && sass src/service-detail.scss public/service-detail.css --no-source-map && sass src/about.scss public/about.css --no-source-map && sass src/blog.scss public/blog.css --no-source-map && sass src/case-studies.scss public/case-studies.css --no-source-map && sass src/contact.scss public/contact.css --no-source-map",
     "dev": "npm run styles && vite",
     "build": "npm run styles && vite build",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "npm run build && node tests/interactions.mjs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",
+    "playwright": "^1.64.1",
     "sass": "^1.86.0",
     "tailwindcss": "^4.1.0",
     "vite": "^6.2.0"

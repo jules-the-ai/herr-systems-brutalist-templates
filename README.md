@@ -58,3 +58,20 @@ Edit static content in `public/blog/` and component styles in `src/blog.scss` (c
 `/contact/` keeps the global header, site shell, footer, and theme script, with a distinct internal message-desk layout. Edit `public/contact/index.html`, `src/contact.scss`, and `public/contact.js`. Contact menus across active pages point here. Email uses the existing site address, `hello@herrsystems.com`; verify the mailbox before a real launch. The phone number `(314) 555-0142` is a clearly labeled reserved fictional preview number: replace both its visible text and `tel:` destination before launch. No actual business phone was supplied.
 
 The form is a functioning client-side email-draft builder, not a server-side delivery endpoint. It validates required fields and email format, prepares a reviewable draft, then offers an explicit mailto link and copy/manual-copy fallback. Nothing is automatically sent, posted, logged, or stored by the form. No secrets or contact data are placed in this website’s query string or local storage. Editing any field invalidates the prepared draft. Without JavaScript the builder stays disabled and the direct email link remains available. Connect and verify a server-side endpoint (validation, abuse controls, delivery errors, retention/privacy policy) before changing this flow into direct web submission; never display “message sent” unless delivery actually succeeds.
+
+
+## Card and link interactions
+
+Current templates load `public/interactions.css` after page styles. Archived designs are intentionally unchanged. `data-interactive-card` opts a card into the neon edge glow; mark its primary native anchor with `data-card-link` to stretch its hit area over the entire card. Keep that link static-positioned and avoid positioned ancestors between it and its card, so its pseudo-element is anchored to the card. No click-handler JavaScript or nested anchors are needed; Enter, modifier-click, and the browser context menu still work. Staff preview cards link to the contact page rather than invented staff profiles. Multi-link navigation panels retain their individual destinations.
+
+The homepage case-study grid becomes a native horizontal scroll-snap slider at 800px and below. Cards are `66.6667vw` wide, exposing the next study. The focusable track supports keyboard scrolling and displays a swipe hint. The case-study index retains its existing responsive grid. Reduced-motion preferences remove card movement and transitions. Normal text links shift to lime on dark surfaces or a readable dark green on light surfaces.
+
+Run browser regression checks (Node 20+):
+
+```bash
+npm ci
+npx playwright install chromium
+npm test
+```
+
+The test builds production output, temporarily starts Vite preview on loopback port 4198, and checks all 14 current routes in both themes at mobile/tablet/desktop sizes, card hit targets, hover/focus styling, actual card navigation, keyboard scrolling, mobile next-card previews, reduced motion, and asset/JavaScript errors. To test another running preview, set `HERR_TEST_URL` to its origin.
