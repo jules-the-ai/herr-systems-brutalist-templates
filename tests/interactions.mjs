@@ -134,7 +134,7 @@ try {
     await page.keyboard.press('ArrowRight');
     await page.waitForTimeout(500);
     assert(await track.evaluate(c => c.scrollLeft > 0), 'Keyboard scroll works');
-    const navTops = await page.locator('.mobile-nav > a, .mobile-nav > details').evaluateAll(a => a.map(x => x.getBoundingClientRect().top));
+    const navTops = await page.locator('.mobile-nav > a, .mobile-nav > button').evaluateAll(a => a.map(x => x.getBoundingClientRect().top));
     if (width <= 720) assert.equal(new Set(navTops).size, 1, 'Mobile nav stays one row');
   }
   const touchContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });

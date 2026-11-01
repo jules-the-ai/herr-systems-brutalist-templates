@@ -86,8 +86,10 @@ The test builds production output, temporarily starts Vite preview on loopback p
 - When changing sample prices, update the visible option labels and calculator model together.
 - No selections are submitted or persisted. The quote button opens an encoded, reviewable email draft. It does not send email.
 - Monthly hosting/support is shown separately and never added to the one-time project total. External subscriptions, usage, processing, domains, taxes, and unscoped work are excluded.
-- Shared desktop navigation is Services, Work, Pricing, About (About us + Blog), Contact. Mobile retains four slots: Services, Work, About (About us + Blog), Contact. Pricing remains reachable from homepage content on mobile.
+- Shared desktop navigation is Services (All services + six services), Work, Pricing, About (About us + Blog), Contact. Mobile retains four slots: Services, Work, Contact, More. More opens a modal offcanvas drawer with Home, All services, Work, Pricing, About us, Blog, Contact, and six individual service links. Native dialog semantics, explicit keyboard focus wrapping, backdrop/Escape/close dismissal, scroll locking, and viewport-change cleanup are handled by navigation.js. Without JavaScript, a footer link list provides a fallback.
 - Native details dropdowns work without JavaScript; `public/navigation.js` adds Escape, outside-click, and focus dismissal. Source styles are `src/navigation.scss`.
 - Run `npm run build`, serve `dist/` via the existing preview, then `HERR_TEST_URL=http://127.0.0.1:8096 npm run test:pricing` and `HERR_TEST_URL=http://127.0.0.1:8096 npm run test:services`. `npm test` starts its own preview for the general interaction suite.
 
 The estimator counts reusable page templates (distinct layouts), not individual content pages. Multiple pages sharing a template are not charged as additional templates. Content entry/migration and custom functionality are scoped separately.
+
+Navigation regression: `HERR_TEST_URL=http://127.0.0.1:8096 node tests/navigation.mjs` verifies actual desktop dropdown destinations and mobile drawer touch destinations, modal focus, scroll lock, dismissal, and same-page service anchors. `node tests/mobile-navigation-art.mjs` verifies compact artwork states.

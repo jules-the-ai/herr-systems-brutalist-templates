@@ -51,29 +51,29 @@ try {
   assert.equal(await page.locator('input[type=checkbox]:checked').count(),0);
   if(width<=720) {
     const menu=page.locator('.mobile-nav');
-    assert.equal(await menu.locator(':scope > a, :scope > details').count(),4);
+    assert.equal(await menu.locator(':scope > a, :scope > button').count(),4);
     assert.equal(await menu.locator('a[href="/pricing/"]').count(),0);
     assert.equal(await menu.locator(':scope > a[href="/blog/"]').count(),0);
-    const tops=await menu.locator(':scope > a, :scope > details').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().top));
+    const tops=await menu.locator(':scope > a, :scope > button').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().top));
     assert.equal(new Set(tops).size,1);
-    await menu.locator('summary').click();
-    assert(await menu.locator('a[href="/blog/"]').isVisible());
-    await menu.locator('summary').press('Escape');
-    assert.equal(await menu.locator('details').evaluate(d=>d.open),false);
-    await menu.locator('summary').click(); await menu.locator('a[href="/blog/"]').click();
+    await menu.locator('[data-menu-open]').click();
+    assert(await page.locator('#site-menu a[href="/blog/"]').isVisible());
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('#site-menu').evaluate(d=>d.open),false);
+    await menu.locator('[data-menu-open]').click(); await page.locator('#site-menu a[href="/blog/"]').click();
     await page.waitForURL(base+'/blog/');
   } else {
     const nav=page.locator('.global-nav');
     assert.equal(await nav.locator(':scope > a[href="/"]').count(),0);
     assert.equal(await nav.locator(':scope > a[href="/pricing/"]').count(),1);
     assert.equal(await nav.locator(':scope > a[href="/blog/"]').count(),0);
-    await nav.locator('summary').focus(); await page.keyboard.press('Enter');
-    assert(await nav.locator('a[href="/blog/"]').isVisible());
+    await nav.locator('.about-dropdown summary').focus(); await page.keyboard.press('Enter');
+    assert(await nav.locator('.about-dropdown a[href="/blog/"]').isVisible());
     await page.keyboard.press('Tab'); assert.equal(await page.evaluate(()=>document.activeElement.getAttribute('href')),'/about/');
     await page.keyboard.press('Tab'); assert.equal(await page.evaluate(()=>document.activeElement.getAttribute('href')),'/blog/');
-    await page.keyboard.press('Escape'); assert.equal(await nav.locator('details').evaluate(d=>d.open),false);
-    await nav.locator('summary').click(); await page.locator('#pricing-title').click();
-    assert.equal(await nav.locator('details').evaluate(d=>d.open),false);
+    await page.keyboard.press('Escape'); assert.equal(await nav.locator('.about-dropdown').evaluate(d=>d.open),false);
+    await nav.locator('.about-dropdown summary').click(); await page.locator('#pricing-title').click();
+    assert.equal(await nav.locator('.about-dropdown').evaluate(d=>d.open),false);
   }
   await page.goto(base+'/pricing/'); await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   if(width===1440||width===390) await page.screenshot({path:`/tmp/herr-pricing-${width}-${theme}.png`,fullPage:true});
@@ -84,16 +84,16 @@ try {
  for(const route of routes) {
   await page.goto(base+route);
   assert.equal(await page.locator('.global-nav > a[href="/pricing/"]').count(),1);
-  assert.equal(await page.locator('.mobile-nav > a, .mobile-nav > details').count(),4);
+  assert.equal(await page.locator('.mobile-nav > a, .mobile-nav > button').count(),4);
   assert.equal(await page.locator('.global-nav details a[href="/blog/"]').count(),1);
  }
  await page.goto(base+'/');
  assert((await page.locator('.home-pricing').innerText()).includes('$70'));
  assert.equal(await page.locator('.home-pricing a').getAttribute('href'),'/pricing/');
  const noJS = await browser.newContext({javaScriptEnabled:false}); const fallback=await noJS.newPage();
- await fallback.goto(base+'/pricing/'); assert(await fallback.locator('noscript').isVisible());
+ await fallback.goto(base+'/pricing/'); assert(await fallback.locator('.pricing-workbench noscript').isVisible());
  assert(await fallback.locator('#template-count').isDisabled());
- await fallback.setViewportSize({width:1440,height:1000});await fallback.locator('.global-nav summary').click();
+ await fallback.setViewportSize({width:1440,height:1000});await fallback.locator('.global-nav .about-dropdown summary').click();
  assert(await fallback.locator('.global-nav details a[href="/blog/"]').isVisible());
  await noJS.close();
  assert.deepEqual(errors,[]); assert.deepEqual(posts,[]);

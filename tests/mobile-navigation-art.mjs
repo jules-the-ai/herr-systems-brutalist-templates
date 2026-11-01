@@ -16,15 +16,16 @@ try {
  for(const width of [320,390,640])for(const theme of ['dark','light'])for(const route of ['/', '/about/', '/blog/', '/services/', '/case-studies/', '/contact/', '/pricing/']) {
   await page.setViewportSize({width,height:844});await page.goto(base+route);await page.evaluate(t=>document.documentElement.dataset.theme=t,theme);
   await checkIcons();
-  await page.locator('.mobile-nav summary').click();await checkIcons();
-  const summary=await page.locator('.mobile-nav summary').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,color:getComputedStyle(el).color}));
+  await page.locator('[data-menu-open]').click();await checkIcons();
+  const summary=await page.locator('[data-menu-open]').evaluate(el=>({bg:getComputedStyle(el).backgroundColor,color:getComputedStyle(el).color}));
   assert.deepEqual(summary,{bg:'rgb(213, 255, 72)',color:'rgb(22, 7, 61)'});
-  assert(await page.locator('.mobile-nav details a[href="/blog/"]').isVisible());
+  assert(await page.locator('#site-menu a[href="/blog/"]').isVisible());
+  if(width===390&&route==='/about/') await page.waitForTimeout(250);
   if(width===390&&route==='/about/') await page.screenshot({path:`/tmp/herr-mobile-art-about-${theme}.png`});
-  await page.locator('.mobile-nav summary').press('Escape');await checkIcons();
+  await page.keyboard.press('Escape');await checkIcons();
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  }
- for(const selector of ['.mobile-nav > a:first-child', '.mobile-nav summary']) {
+ for(const selector of ['.mobile-nav > a:first-child', '[data-menu-open]']) {
   await page.goto(base+'/');await page.locator(selector).focus();await checkIcons();
   const r=await page.locator(selector).boundingBox();await page.mouse.move(r.x+r.width/2,r.y+r.height/2);await page.mouse.down();await checkIcons();await page.mouse.up();
  }
