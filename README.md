@@ -124,3 +124,10 @@ The homepage hero replaces its decorative monitor with a working browser-only te
 ### Pixel-art navigation mark
 
 Active headers use `/assets/davy-hexagon-mark-pixel.svg`, a transparent 32×32-grid reinterpretation of the original `davy-hexagon-mark.png` alpha silhouette. Its original dominant lime (#ccff00), proportions, nav sizing, and outer/inner hexagons are preserved; only the edges gain restrained pixel stepping. Original PNGs, favicons, About hero art, and archived page headers remain unchanged. The staff generator inherits the navigation asset from the About shell. Verify with `node tests/nav-pixel-logo.mjs` against the built preview.
+
+
+### Dark default and footer return link
+
+Every active page starts dark, independent of operating-system preference or old stored theme settings. The manual header switch changes the current page; reloads and new-page navigation start dark again. Shared `retro3.js` does not access storage. Active routes cache-bust the shared script.
+
+`#top` is a dedicated zero-height, focusable anchor at the start of the body, not the sticky header or homepage hero. Footer links use that real document-start anchor and work natively with or without JavaScript. Staff pages inherit both fixes from the About shell. Verify with `node tests/theme-and-top.mjs` after building and serving.
