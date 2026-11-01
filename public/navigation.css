@@ -2,6 +2,31 @@
   display: contents;
 }
 
+.site-header.global-header .theme-toggle {
+  position: relative;
+  width: 30.1px;
+  height: 30.1px;
+  flex-shrink: 0;
+}
+
+.site-header.global-header .theme-toggle span {
+  font-size: 14.7px;
+}
+
+.site-header.global-header .theme-toggle::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
+.global-header .logo small {
+  font-size: 9.6px;
+}
+
 .global-header {
   position: sticky;
   z-index: 40;
@@ -229,6 +254,10 @@ html.site-menu-open {
   }
 }
 @media (max-width: 720px) {
+  .site-header.global-header .theme-toggle {
+    width: 28.7px;
+    height: 28.7px;
+  }
   html {
     background-color: #164f91;
   }

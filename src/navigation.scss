@@ -1,5 +1,10 @@
 // Shared desktop dropdowns and compact offcanvas navigation.
 .page-surface {display:contents}
+// Compact visual control, retaining a 44px invisible touch target.
+.site-header.global-header .theme-toggle {position:relative;width:30.1px;height:30.1px;flex-shrink:0}
+.site-header.global-header .theme-toggle span {font-size:14.7px}
+.site-header.global-header .theme-toggle::before {content:'';position:absolute;left:50%;top:50%;width:44px;height:44px;transform:translate(-50%,-50%)}
+.global-header .logo small {font-size:9.6px}
 .global-header {position:sticky;z-index:40}
 .global-header .global-nav {overflow:visible}
 .nav-dropdown {position:relative;color:#fff}
@@ -36,6 +41,7 @@ html.site-menu-open {overflow:hidden}
 @keyframes menu-slide-in {from{transform:translateX(100%)}to{transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){.site-menu[open]{animation:none}}
 @media(max-width:720px){
+ .site-header.global-header .theme-toggle {width:28.7px;height:28.7px}
  // A shared mobile masthead: scrolls with the document on every route.
  // Safe-area layout only; native Safari toolbar tint needs device verification.
  html {background-color:#164f91}
