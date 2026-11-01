@@ -80,7 +80,7 @@
   max-height: 100dvh;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 28px 24px max(28px, env(safe-area-inset-bottom));
+  padding: max(28px, env(safe-area-inset-top)) 24px max(28px, env(safe-area-inset-bottom));
   border: 0;
   border-left: 2px solid var(--menu-accent);
   background: var(--menu-bg);
@@ -225,6 +225,14 @@ html.site-menu-open {
   }
 }
 @media (max-width: 720px) {
+  html {
+    background-color: #164f91;
+  }
+  .site-header.global-header {
+    position: static;
+    top: auto;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
   .mobile-nav {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     z-index: 50;

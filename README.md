@@ -131,3 +131,8 @@ Active headers use `/assets/davy-hexagon-mark-pixel.svg`, a transparent 32×32-g
 Every active page starts dark, independent of operating-system preference or old stored theme settings. The manual header switch changes the current page; reloads and new-page navigation start dark again. Shared `retro3.js` does not access storage. Active routes cache-bust the shared script.
 
 `#top` is a dedicated zero-height, focusable anchor at the start of the body, not the sticky header or homepage hero. Footer links use that real document-start anchor and work natively with or without JavaScript. Staff pages inherit both fixes from the About shell. Verify with `node tests/theme-and-top.mjs` after building and serving.
+
+
+### Unified mobile masthead and Safari safe area
+
+All active routes share the homepage's non-sticky top masthead at widths up to 720px. The fixed bottom navigation and desktop sticky navigation are unchanged. The shared navigation stylesheet owns this rule, avoiding the internal-page CSS-order mismatch. Every active page declares `viewport-fit=cover`, retains a static `theme-color` of #164f91, and uses a matching mobile root background plus header `env(safe-area-inset-top)` padding. This lets the blue masthead extend into an iPhone safe area without placing its controls under the Dynamic Island. The manual theme toggle does not change Safari's static chrome color. Physical iPhone Safari chrome cannot be verified from a headless page screenshot; check the LAN preview on the device as well.

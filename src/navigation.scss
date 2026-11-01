@@ -12,7 +12,7 @@
 .global-nav .nav-submenu a:hover,.global-nav .nav-submenu a:focus-visible,.global-nav .nav-submenu a.active {background:#d5ff48;color:#16073d}
 .site-menu {
  --menu-bg:#1c0c45;--menu-text:#fcfaff;--menu-muted:#d8d2e5;--menu-accent:#49f5e6;--menu-line:#7653ba;
- position:fixed;inset:0 0 0 auto;margin:0;width:min(400px,92vw);max-width:none;height:100dvh;max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;padding:28px 24px max(28px,env(safe-area-inset-bottom));border:0;border-left:2px solid var(--menu-accent);background:var(--menu-bg);color:var(--menu-text);box-shadow:-12px 0 40px #0006;
+ position:fixed;inset:0 0 0 auto;margin:0;width:min(400px,92vw);max-width:none;height:100dvh;max-height:100dvh;overflow-y:auto;overscroll-behavior:contain;padding:max(28px,env(safe-area-inset-top)) 24px max(28px,env(safe-area-inset-bottom));border:0;border-left:2px solid var(--menu-accent);background:var(--menu-bg);color:var(--menu-text);box-shadow:-12px 0 40px #0006;
 }
 .site-menu[open] {animation:menu-slide-in .2s ease-out}
 .site-menu::backdrop {background:#08071bc9}
@@ -35,6 +35,10 @@ html.site-menu-open {overflow:hidden}
 @keyframes menu-slide-in {from{transform:translateX(100%)}to{transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){.site-menu[open]{animation:none}}
 @media(max-width:720px){
+ // A shared mobile masthead: scrolls with the document on every route.
+ // The root and safe-area padding keep Safari's top chrome continuous blue.
+ html {background-color:#164f91}
+ .site-header.global-header {position:static;top:auto;padding-top:env(safe-area-inset-top,0px)}
  .mobile-nav {grid-template-columns:repeat(4,minmax(0,1fr));z-index:50;padding-bottom:env(safe-area-inset-bottom)}
  .mobile-nav>a,.mobile-nav>.mobile-more {min-width:0;min-height:72px}
  .mobile-nav .mobile-more {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;border-radius:0;padding:0;background:transparent;color:#fff;cursor:pointer;font:700 13px/1.2 var(--mono);letter-spacing:.03em;text-transform:uppercase}
