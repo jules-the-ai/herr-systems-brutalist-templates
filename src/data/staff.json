@@ -1,0 +1,167 @@
+[
+  {
+    "slug": "alex-morgan",
+    "name": "Alex Morgan",
+    "role": "Design & strategy",
+    "portrait": "headshot-1.svg",
+    "tagline": "Turning a busy brief into a clear, welcoming website.",
+    "short": "A thoughtful designer connecting business goals with clear content, useful layouts, and a little personality.",
+    "specialty": "Clarity meets creativity.",
+    "intro": "Alex brings structure to the early, sometimes messy stage of a website project. In this fictional profile, they help a small team turn ideas, references, and business goals into a visual direction people can understand and use.",
+    "about": [
+      "Good design starts with knowing what a visitor is trying to do. Alex focuses on the questions behind a brief: what needs to be easy to find, what makes a business distinct, and what would help someone feel ready to get in touch.",
+      "Their work moves from content outlines and quick layout sketches to responsive page templates. Typography, spacing, and contrast are considered together, so the result has personality without making the useful information harder to read.",
+      "Alex likes collaborative reviews with a clear question to answer. Instead of asking whether a design “feels right,” they walk through the decisions, explain the trade-offs, and make the next round of feedback manageable."
+    ],
+    "skills": [
+      "Information architecture",
+      "Responsive web design",
+      "Visual direction",
+      "Accessible typography",
+      "Wireframes & prototypes",
+      "Content structure",
+      "Design systems",
+      "Client workshops"
+    ],
+    "focus": "Websites, page templates, and design direction",
+    "collaboration": "Business owners, developers, and content contributors",
+    "handoff": "Responsive layouts, reusable components, and annotated design decisions",
+    "approach": [
+      [
+        "Listen before designing",
+        "Start with the audience, content, and the real job each page needs to do."
+      ],
+      [
+        "Make the structure visible",
+        "Use a content map and lightweight wireframes to agree on the direction before polishing it."
+      ],
+      [
+        "Leave a useful handoff",
+        "Explain the design rules, document the reusable parts, and keep implementation questions in the conversation."
+      ]
+    ],
+    "contributions": [
+      [
+        "A service-led website",
+        "Sketch a homepage, service-detail template, and contact journey that help a visitor choose their next step."
+      ],
+      [
+        "A small design system",
+        "Define type, spacing, color, and component patterns a team can carry into new pages."
+      ]
+    ],
+    "interests": "Away from the screen, this demo version of Alex collects old interface references, photographs hand-painted signs, and finds reasons to take the scenic walking route.",
+    "service": "/services/web-design/",
+    "serviceLabel": "Explore web design"
+  },
+  {
+    "slug": "sam-rivera",
+    "name": "Sam Rivera",
+    "role": "Development & systems",
+    "portrait": "headshot-2.svg",
+    "tagline": "Making the thoughtful details work behind the scenes.",
+    "short": "A practical developer focused on maintainable websites, useful integrations, and reliable technical handoffs.",
+    "specialty": "Good ideas, built properly.",
+    "intro": "Sam is the technical counterpart to a clear design brief. This fictional profile shows a developer who turns approved layouts and business requirements into understandable systems, without reaching for complexity before it is needed.",
+    "about": [
+      "Sam starts by understanding how a site fits into the work around it. A contact form might need a reliable handoff, a content editor might need a simpler publishing flow, or a team might need to connect two tools without another manual copy-and-paste step.",
+      "They favor small, testable pieces and readable implementation choices. Performance, keyboard behavior, validation, and failure states are part of the feature rather than something left until after the happy path works.",
+      "A good finish includes more than deployed code. Sam documents setup, identifies ongoing dependencies, and explains how the next person can make changes without having to rediscover every decision."
+    ],
+    "skills": [
+      "Frontend development",
+      "JavaScript",
+      "HTML & SCSS",
+      "API integrations",
+      "Workflow automation",
+      "Accessibility testing",
+      "Performance reviews",
+      "Technical documentation"
+    ],
+    "focus": "Custom features, integrations, and maintainable systems",
+    "collaboration": "Designers, operations teams, and existing technical leads",
+    "handoff": "Tested code, setup notes, and clear ownership of ongoing dependencies",
+    "approach": [
+      [
+        "Map the real workflow",
+        "Identify the inputs, outputs, permissions, and the person responsible for each decision."
+      ],
+      [
+        "Build and test the edges",
+        "Check validation, loading, empty states, and failure handling alongside the main journey."
+      ],
+      [
+        "Make maintenance realistic",
+        "Document configuration, explain dependencies, and leave a practical path for updates."
+      ]
+    ],
+    "contributions": [
+      [
+        "A focused integration",
+        "Connect a website inquiry to an existing business tool with clear validation and failure handling."
+      ],
+      [
+        "A human-reviewed workflow",
+        "Prepare useful drafts or route repeat tasks while keeping sensitive decisions with a person."
+      ]
+    ],
+    "interests": "Outside project work, this demo version of Sam enjoys repairing small electronics, exploring creative coding sketches, and making overly detailed notes about surprisingly simple tools.",
+    "service": "/services/#development",
+    "serviceLabel": "Explore development"
+  },
+  {
+    "slug": "jordan-ellis",
+    "name": "Jordan Ellis",
+    "role": "Client care & projects",
+    "portrait": "headshot-3.svg",
+    "tagline": "Keeping the work clear, connected, and moving.",
+    "short": "A steady project partner bringing useful questions, organized feedback, and clear next steps to the team.",
+    "specialty": "Keeping people in the loop.",
+    "intro": "Jordan helps people understand what is happening and what comes next. This fictional profile illustrates the client-care side of a small team: translating a broad request into an organized conversation and keeping delivery grounded in an agreed scope.",
+    "about": [
+      "Jordan makes room for the questions people sometimes hesitate to ask. What is included? Who supplies the content? Which decision is needed now, and which can wait? Those details shape a calmer project for everyone involved.",
+      "They help collect the right context, bring feedback together, and surface dependencies before they become surprises. The aim is not more meetings; it is a shared understanding of the next useful step.",
+      "At handoff, Jordan helps gather the practical notes: where the important information lives, how to request changes, and what ongoing support covers. A project should feel understandable after launch, not only while the team is building it."
+    ],
+    "skills": [
+      "Project coordination",
+      "Client communication",
+      "Discovery conversations",
+      "Scope documentation",
+      "Feedback facilitation",
+      "Content planning",
+      "Launch checklists",
+      "Handoff guidance"
+    ],
+    "focus": "Clear scope, communication, and project coordination",
+    "collaboration": "Business owners, content contributors, and the delivery team",
+    "handoff": "Agreed next steps, organized project notes, and a practical support plan",
+    "approach": [
+      [
+        "Ask useful questions",
+        "Understand the goal, the constraints, and what would make the project easier to manage."
+      ],
+      [
+        "Keep decisions organized",
+        "Collect feedback in one place and make approvals, dependencies, and changes visible."
+      ],
+      [
+        "Close the loop",
+        "Confirm what was delivered, explain the handoff, and clarify where to go for ongoing help."
+      ]
+    ],
+    "contributions": [
+      [
+        "A clear project brief",
+        "Bring goals, responsibilities, deliverables, and open questions into a scope the whole team can use."
+      ],
+      [
+        "A practical launch handoff",
+        "Coordinate content checks, approvals, and next-step documentation before the project changes hands."
+      ]
+    ],
+    "interests": "Away from the project board, this demo version of Jordan enjoys community events, illustrated notebooks, and finding the best quiet corner in an independent coffee shop.",
+    "service": "/services/#consulting",
+    "serviceLabel": "Explore consulting"
+  }
+]

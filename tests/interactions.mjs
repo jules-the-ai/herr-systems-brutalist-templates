@@ -23,7 +23,7 @@ try {
   const routes = ['/', '/services/', '/services/billboard/', '/services/web-design/',
     '/case-studies/', '/case-studies/maple-street-workshop/',
     '/case-studies/fieldnote-operations/', '/case-studies/northline-community/',
-    '/about/', '/pricing/', '/blog/', '/blog/a-clearer-website/',
+    '/about/', '/about/team/alex-morgan/', '/about/team/sam-rivera/', '/about/team/jordan-ellis/', '/pricing/', '/blog/', '/blog/a-clearer-website/',
     '/blog/start-small-with-automation/', '/blog/what-good-hosting-should-cover/', '/contact/'];
   const cardCounts = { '/': 9, '/services/': 6, '/services/billboard/': 4,
     '/case-studies/': 3, '/about/': 3, '/blog/': 3 };

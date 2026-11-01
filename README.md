@@ -93,3 +93,17 @@ The test builds production output, temporarily starts Vite preview on loopback p
 The estimator counts reusable page templates (distinct layouts), not individual content pages. Multiple pages sharing a template are not charged as additional templates. Content entry/migration and custom functionality are scoped separately.
 
 Navigation regression: `HERR_TEST_URL=http://127.0.0.1:8096 node tests/navigation.mjs` verifies actual desktop dropdown destinations and mobile drawer touch destinations, modal focus, scroll lock, dismissal, and same-page service anchors. `node tests/mobile-navigation-art.mjs` verifies compact artwork states.
+
+
+## Staff profiles
+
+Three fictional demo profiles share one staff-single design:
+- `/about/team/alex-morgan/` — Design and strategy
+- `/about/team/sam-rivera/` — Development and systems
+- `/about/team/jordan-ellis/` — Client care and projects
+
+Edit `src/data/staff.json` for names, roles, bios, skills, working approach, example responsibilities, interests, and related-service links. `scripts/build-staff.mjs` regenerates the About team cards and all profile pages with `npm run profiles`; both `npm run dev` and `npm run build` run it automatically. The current About page supplies the approved global shell/navigation/footer, keeping generated profiles aligned with it. Profile styling is in `src/staff-profile.scss`, compiled into `public/staff-profile.css`.
+
+Do not hand-edit generated profile HTML. Keep sample identities and artwork labeled as demos until real staff content is supplied. The contact buttons go to the real contact template; no personal contact channels or credentials are fabricated. If removing or renaming a profile, also remove its old generated directory after checking that existing links have been updated.
+
+After building and serving dist, run `HERR_TEST_URL=http://127.0.0.1:8096 npm run test:staff` to check three profiles, five viewport widths, both themes, portrait geometry, mobile gutters, section/fragment links, offcanvas, and navigation from team cards. The general interaction suite also covers the three profile routes.
