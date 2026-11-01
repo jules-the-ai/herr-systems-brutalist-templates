@@ -1,10 +1,10 @@
-import { calculateEstimate } from './pricing-calculator.js';
+import { calculateEstimate } from './pricing-calculator.js?v=templates-2';
 const form = document.querySelector('#estimate-form');
 const money = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
 function update() {
   const fields = new FormData(form);
-  const estimate = calculateEstimate({ pages: fields.get('pages'), design: fields.get('design'), features: fields.getAll('feature'), hosting: fields.get('hosting') });
-  document.querySelector('#page-count-output').textContent = `${estimate.pages} ${estimate.pages === 1 ? 'page' : 'pages'}`;
+  const estimate = calculateEstimate({ templates: fields.get('templates'), design: fields.get('design'), features: fields.getAll('feature'), hosting: fields.get('hosting') });
+  document.querySelector('#template-count-output').textContent = `${estimate.templates} ${estimate.templates === 1 ? 'page template' : 'page templates'}`;
   document.querySelector('#estimate-lines').replaceChildren(...estimate.lines.map(line => {
     const item = document.createElement('li');
     const label = document.createElement('span'); label.textContent = line.label;

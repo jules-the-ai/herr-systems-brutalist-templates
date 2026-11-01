@@ -81,7 +81,7 @@ The test builds production output, temporarily starts Vite preview on loopback p
 
 `/pricing/` is a client-side estimator using the approved page shell. The confirmed hourly rate is $70; the calculator’s fixed-scope feature prices and monthly plans are illustrative samples, not automatic quotes or guaranteed discounts.
 
-- Pricing model: `public/pricing-calculator.js` (pure calculation with bounded page counts and deduplicated features).
+- Pricing model: `public/pricing-calculator.js` (pure calculation with bounded template counts and deduplicated features).
 - UI: `public/pricing/index.html`, `public/pricing.js`, `src/pricing.scss`.
 - When changing sample prices, update the visible option labels and calculator model together.
 - No selections are submitted or persisted. The quote button opens an encoded, reviewable email draft. It does not send email.
@@ -89,3 +89,5 @@ The test builds production output, temporarily starts Vite preview on loopback p
 - Shared desktop navigation is Services, Work, Pricing, About (About us + Blog), Contact. Mobile retains four slots: Services, Work, About (About us + Blog), Contact. Pricing remains reachable from homepage content on mobile.
 - Native details dropdowns work without JavaScript; `public/navigation.js` adds Escape, outside-click, and focus dismissal. Source styles are `src/navigation.scss`.
 - Run `npm run build`, serve `dist/` via the existing preview, then `HERR_TEST_URL=http://127.0.0.1:8096 npm run test:pricing` and `HERR_TEST_URL=http://127.0.0.1:8096 npm run test:services`. `npm test` starts its own preview for the general interaction suite.
+
+The estimator counts reusable page templates (distinct layouts), not individual content pages. Multiple pages sharing a template are not charged as additional templates. Content entry/migration and custom functionality are scoped separately.

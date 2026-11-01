@@ -3,17 +3,17 @@ import { chromium } from 'playwright';
 import { calculateEstimate, FEATURES } from '../public/pricing-calculator.js';
 const keys = Object.keys(FEATURES);
 let combinations = 0;
-for (let pages = 1; pages <= 20; pages++) for (const design of ['standard', 'custom']) {
+for (let templates = 1; templates <= 20; templates++) for (const design of ['standard', 'custom']) {
   for (let mask = 0; mask < 128; mask++) for (const [hosting, monthly] of [['none', 0], ['hosting', 35], ['managed', 70]]) {
     const features = keys.filter((key, i) => mask & (1 << i));
-    const result = calculateEstimate({ pages, design, features, hosting });
-    const expected = 280 + (pages - 1) * 70 + (design === 'custom' ? 350 : 0) + features.reduce((sum, key) => sum + FEATURES[key].price, 0);
+    const result = calculateEstimate({ templates, design, features, hosting });
+    const expected = 280 + (templates - 1) * 70 + (design === 'custom' ? 350 : 0) + features.reduce((sum, key) => sum + FEATURES[key].price, 0);
     assert.equal(result.total, expected); assert.equal(result.monthly, monthly); combinations++;
   }
 }
-assert.equal(calculateEstimate({pages: -10}).pages, 1);
-assert.equal(calculateEstimate({pages: 200}).pages, 20);
-assert.equal(calculateEstimate({pages: 'bad'}).pages, 5);
+assert.equal(calculateEstimate({templates: -10}).templates, 1);
+assert.equal(calculateEstimate({templates: 200}).templates, 20);
+assert.equal(calculateEstimate({templates: 'bad'}).templates, 5);
 assert.equal(calculateEstimate({features:['ai','ai','invalid','__proto__'],hosting:'__proto__'}).total, 980);
 console.log(`PASS ${combinations} estimator combinations, bounds, duplicate and invalid inputs`);
 const base = process.env.HERR_TEST_URL || 'http://127.0.0.1:8096';
@@ -32,8 +32,8 @@ try {
   assert.equal(await page.locator('#project-total').textContent(), '$1,680');
   assert.equal(await page.locator('#mobile-project-total').textContent(), '$1,680');
   await page.locator('[name=design][value=custom]').check();
-  await page.locator('#page-count').focus(); await page.keyboard.press('Home');
-  assert.equal(await page.locator('#page-count-output').textContent(),'1 page');
+  await page.locator('#template-count').focus(); await page.keyboard.press('Home');
+  assert.equal(await page.locator('#template-count-output').textContent(),'1 page template');
   assert.equal(await page.locator('#project-total').textContent(), '$1,750');
   await page.keyboard.press('End');
   assert.equal(await page.locator('#project-total').textContent(), '$3,080');
@@ -79,7 +79,7 @@ try {
   if(width===1440||width===390) await page.screenshot({path:`/tmp/herr-pricing-${width}-${theme}.png`,fullPage:true});
   console.log(`PASS ${width}px ${theme}: live controls, reset, quote draft, mobile/desktop navigation, no overflow`);
  }
- // All active shell pages share the new navigation; no duplicate current-page flags.
+ // All active shell templates share the new navigation; no duplicate current-page flags.
  const routes = ['/', '/services/', '/services/web-design/', '/about/', '/blog/', '/blog/a-clearer-website/', '/case-studies/', '/case-studies/maple-street-workshop/', '/contact/', '/pricing/'];
  for(const route of routes) {
   await page.goto(base+route);
@@ -92,7 +92,7 @@ try {
  assert.equal(await page.locator('.home-pricing a').getAttribute('href'),'/pricing/');
  const noJS = await browser.newContext({javaScriptEnabled:false}); const fallback=await noJS.newPage();
  await fallback.goto(base+'/pricing/'); assert(await fallback.locator('noscript').isVisible());
- assert(await fallback.locator('#page-count').isDisabled());
+ assert(await fallback.locator('#template-count').isDisabled());
  await fallback.setViewportSize({width:1440,height:1000});await fallback.locator('.global-nav summary').click();
  assert(await fallback.locator('.global-nav details a[href="/blog/"]').isVisible());
  await noJS.close();

@@ -1,5 +1,5 @@
 .pricing-page {
- --pricing-surface:#241053; --pricing-soft:#1c0c45; --pricing-muted:#d8d2e5;
+ --pricing-surface:#241053; --pricing-soft:#1c0c45; --pricing-input:#160a32; --pricing-muted:#d8d2e5;
  .pricing-intro > p {max-width:72ch}
  .pricing-main {padding-top:20px}
  .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -13,7 +13,7 @@
  h3 {margin:0 0 22px;font:700 22px/1.3 var(--sans);letter-spacing:-.025em}
  .option-section h3 > span {display:inline-block;margin-right:10px;color:var(--cyan);font:500 13px var(--mono)}
  .control-label {display:flex;justify-content:space-between;gap:12px;font-weight:700;margin-bottom:12px}
- #page-count-output {color:var(--cyan)}
+ #template-count-output {color:var(--cyan)}
  input[type=range] {width:100%;min-height:40px;margin:0;accent-color:var(--cyan);cursor:pointer}
  .range-labels {display:flex;justify-content:space-between;color:var(--pricing-muted);font:500 12px/1.5 var(--mono)}
  .control-help {font-size:13px;line-height:1.7;color:var(--pricing-muted)}
@@ -29,7 +29,14 @@
  .feature-option strong {font-size:15px;line-height:1.4}
  .feature-option small {margin:8px 0 12px;font-size:13px;line-height:1.6;color:var(--pricing-muted)}
  .feature-option b {color:var(--cyan);font:700 13px/1.5 var(--mono)}
- select {appearance:auto;width:100%;min-height:48px;border:1px solid var(--line);border-radius:0;padding:10px;background:var(--pricing-soft);color:var(--white);font:14px/1.5 var(--sans);color-scheme:dark}
+ // Match the contact-page native select, including its inert arrow compartment.
+ .pricing-select {position:relative;min-width:0}
+ .pricing-select select {display:block;width:100%;appearance:none;-webkit-appearance:none;min-height:54px;padding:13px 62px 13px 14px;border:1px solid var(--line);border-radius:0;background:var(--pricing-input);color:var(--white);font:400 16px/1.6 var(--sans);color-scheme:dark;cursor:pointer;text-overflow:ellipsis}
+ .pricing-select::before {content:'';position:absolute;z-index:1;right:1px;top:1px;bottom:1px;width:46px;border-left:1px solid var(--line);background:var(--pricing-soft);pointer-events:none}
+ .pricing-select::after {content:'';position:absolute;z-index:2;right:20px;top:50%;width:8px;height:8px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+ .pricing-select:hover select,.pricing-select:focus-within select {border-color:var(--cyan)}
+ .pricing-select:hover::before,.pricing-select:focus-within::before {border-left-color:var(--cyan)}
+ .pricing-select option {color:var(--white);background:var(--pricing-input);font:400 16px/1.6 var(--sans)}
  input:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible {outline:3px solid var(--cyan);outline-offset:4px}
  .estimate-form-actions {display:flex;align-items:center;flex-wrap:wrap;gap:16px;color:var(--pricing-muted);font-size:12px;padding:0 4px 20px}
  .reset-estimate {border:0;background:none;padding:8px 0;color:var(--cyan);font:700 13px/1.5 var(--mono);cursor:pointer;text-decoration:underline;text-underline-offset:4px}
@@ -50,7 +57,7 @@
  .pricing-explainer a,.pricing-note a {color:var(--cyan);text-underline-offset:4px}
  .pricing-note {padding:20px;border:1px solid var(--cyan)}
 }
-:root[data-theme=light] .pricing-page {--pricing-surface:#f5faff;--pricing-soft:#e7f2ff;--pricing-muted:#304b66;select {color-scheme:light}}
+:root[data-theme=light] .pricing-page {--pricing-surface:#f5faff;--pricing-soft:#e7f2ff;--pricing-input:#f8fbff;--pricing-muted:#304b66;select {color-scheme:light}}
 @media(max-width:960px){.pricing-page .estimate-layout {grid-template-columns:minmax(0,1fr) minmax(280px,.85fr);gap:20px}.pricing-page .feature-options {grid-template-columns:1fr}}
 @media(max-width:720px){.pricing-page {
  .estimate-layout,.pricing-explainer {grid-template-columns:minmax(0,1fr)}
@@ -70,3 +77,8 @@
  .mobile-estimate a {color:var(--cyan);font-size:12px;font-weight:700;text-underline-offset:4px}
  #estimate-summary {scroll-margin-top:180px}
 }}
+
+@media(forced-colors:active){
+ .pricing-page .pricing-select::before,.pricing-page .pricing-select::after {display:none}
+ .pricing-page .pricing-select select {appearance:auto;-webkit-appearance:auto;padding-right:14px}
+}

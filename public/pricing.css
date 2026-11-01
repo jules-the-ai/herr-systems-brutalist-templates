@@ -1,6 +1,7 @@
 .pricing-page {
   --pricing-surface:#241053;
   --pricing-soft:#1c0c45;
+  --pricing-input:#160a32;
   --pricing-muted:#d8d2e5;
 }
 .pricing-page .pricing-intro > p {
@@ -79,7 +80,7 @@
   font-weight: 700;
   margin-bottom: 12px;
 }
-.pricing-page #page-count-output {
+.pricing-page #template-count-output {
   color: var(--cyan);
 }
 .pricing-page input[type=range] {
@@ -166,17 +167,61 @@
   color: var(--cyan);
   font: 700 13px/1.5 var(--mono);
 }
-.pricing-page select {
-  appearance: auto;
+.pricing-page .pricing-select {
+  position: relative;
+  min-width: 0;
+}
+.pricing-page .pricing-select select {
+  display: block;
   width: 100%;
-  min-height: 48px;
+  appearance: none;
+  -webkit-appearance: none;
+  min-height: 54px;
+  padding: 13px 62px 13px 14px;
   border: 1px solid var(--line);
   border-radius: 0;
-  padding: 10px;
-  background: var(--pricing-soft);
+  background: var(--pricing-input);
   color: var(--white);
-  font: 14px/1.5 var(--sans);
+  font: 400 16px/1.6 var(--sans);
   color-scheme: dark;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+.pricing-page .pricing-select::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  width: 46px;
+  border-left: 1px solid var(--line);
+  background: var(--pricing-soft);
+  pointer-events: none;
+}
+.pricing-page .pricing-select::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--cyan);
+  border-bottom: 2px solid var(--cyan);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+.pricing-page .pricing-select:hover select, .pricing-page .pricing-select:focus-within select {
+  border-color: var(--cyan);
+}
+.pricing-page .pricing-select:hover::before, .pricing-page .pricing-select:focus-within::before {
+  border-left-color: var(--cyan);
+}
+.pricing-page .pricing-select option {
+  color: var(--white);
+  background: var(--pricing-input);
+  font: 400 16px/1.6 var(--sans);
 }
 .pricing-page input:focus-visible, .pricing-page select:focus-visible, .pricing-page button:focus-visible, .pricing-page a:focus-visible {
   outline: 3px solid var(--cyan);
@@ -295,6 +340,7 @@
 :root[data-theme=light] .pricing-page {
   --pricing-surface:#f5faff;
   --pricing-soft:#e7f2ff;
+  --pricing-input:#f8fbff;
   --pricing-muted:#304b66;
 }
 :root[data-theme=light] .pricing-page select {
@@ -373,5 +419,15 @@
   }
   .pricing-page #estimate-summary {
     scroll-margin-top: 180px;
+  }
+}
+@media (forced-colors: active) {
+  .pricing-page .pricing-select::before, .pricing-page .pricing-select::after {
+    display: none;
+  }
+  .pricing-page .pricing-select select {
+    appearance: auto;
+    -webkit-appearance: auto;
+    padding-right: 14px;
   }
 }
