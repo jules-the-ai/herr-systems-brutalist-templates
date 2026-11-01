@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .service-detail-page {
   --detail-surface: #241053;
   --detail-soft-surface: #1c0c45;
@@ -288,5 +289,82 @@
 @media (max-width: 480px) {
   .service-detail .detail-fit {
     padding: 22px;
+  }
+}
+.service-detail-page .service-detail .detail-subtypes {
+  padding-top: 30px;
+  padding-bottom: 34px;
+}
+.service-detail-page .service-detail .detail-subtypes-intro {
+  max-width: 70ch;
+  margin-bottom: 22px;
+}
+.service-detail-page .service-detail .detail-subtypes-intro h2 {
+  font-size: clamp(24px, 2.4vw, 30px);
+  margin-bottom: 10px;
+}
+.service-detail-page .service-detail .detail-subtypes-intro p {
+  margin: 0;
+  color: var(--detail-muted);
+  font-size: 15px;
+}
+.service-detail-page .service-detail .detail-subtype-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  align-items: start;
+}
+.service-detail-page .service-detail .detail-subtype {
+  min-width: 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 110px;
+}
+.service-detail-page .service-detail .detail-subtype > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 2px;
+  list-style: none;
+  font: 700 16px/1.5 var(--sans);
+  letter-spacing: -0.015em;
+}
+.service-detail-page .service-detail .detail-subtype > summary::-webkit-details-marker {
+  display: none;
+}
+.service-detail-page .service-detail .detail-subtype > summary::after {
+  content: "+";
+  flex-shrink: 0;
+  color: var(--cyan);
+  font: 500 20px/1 var(--mono);
+}
+.service-detail-page .service-detail .detail-subtype[open] > summary::after {
+  content: "−";
+}
+.service-detail-page .service-detail .detail-subtype > summary:hover {
+  color: var(--cyan);
+}
+.service-detail-page .service-detail .detail-subtype-copy {
+  padding: 0 2px 20px;
+}
+.service-detail-page .service-detail .detail-subtype-copy p {
+  margin: 0 0 14px;
+  color: var(--detail-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.service-detail-page .service-detail .detail-subtype-copy a {
+  display: inline-block;
+  font: 700 12px/1.7 var(--mono);
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 720px) {
+  .service-detail-page .service-detail .detail-subtype-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .service-detail-page .service-detail .detail-subtypes {
+    padding-top: 26px;
+    padding-bottom: 28px;
   }
 }
