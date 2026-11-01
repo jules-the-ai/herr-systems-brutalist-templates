@@ -1,3 +1,7 @@
+.page-surface {
+  display: contents;
+}
+
 .global-header {
   position: sticky;
   z-index: 40;
@@ -227,6 +231,18 @@ html.site-menu-open {
 @media (max-width: 720px) {
   html {
     background-color: #164f91;
+  }
+  html:root[data-theme] body {
+    background: #164f91;
+  }
+  .page-surface {
+    display: flow-root;
+    background-color: var(--space);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1411764706) 1px, transparent 1px);
+    background-size: 15px 15px;
+  }
+  :root[data-theme=light] .page-surface {
+    background-image: radial-gradient(rgba(26, 94, 159, 0.1568627451) 1px, transparent 1px);
   }
   .site-header.global-header {
     position: static;

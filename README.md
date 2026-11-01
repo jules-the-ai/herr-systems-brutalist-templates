@@ -141,3 +141,10 @@ All active routes share the homepage's non-sticky top masthead at widths up to 7
 ### Safari tint: physical-device feedback
 
 The experimental fixed `.safari-top-tint` layer was removed after Emily reported that it failed to change native Safari tint and instead introduced a visible fixed thin blue line below the safe area. Do not reintroduce that overlay. `node tests/mobile-no-top-overlay.mjs` asserts that no top-edge fixed strip is present while retaining non-sticky mobile mastheads and fixed bottom navigation. Viewport-fit, safe-area layout padding, and static theme-color metadata remain, but they have NOT solved native iPhone Safari tinting. Further changes require the device's iOS version and screenshot/remote-inspection evidence, not another Chromium-only tint workaround.
+
+
+### Separate mobile document canvas and page surface
+
+Emily's iOS 27.0.1 screenshot showed a purple native status area above an otherwise correctly blue non-sticky masthead. The mobile body was still computed purple, even though html/meta were blue. The document canvas is now explicitly blue on both html and body (no body background image), while the original purple/light dotted background is on `.page-surface`, wrapping all content after the masthead. There is no fixed tint strip. On desktop the wrapper is display:contents so it adds no layout box. Staff generation inherits both wrapper boundaries from the About shell.
+
+`node tests/mobile-canvas.mjs` verifies body/root blue, preserved themed surface, balanced wrapper structure, non-sticky headers, no overlay and no overflow; it failed before the body change. This is a structural correction to the remaining purple paint source, NOT a verified claim about native Safari: the iOS 27.0.1 status-bar color still requires physical-device confirmation.
