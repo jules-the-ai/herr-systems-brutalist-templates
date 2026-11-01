@@ -119,3 +119,8 @@ The homepage hero replaces its decorative monitor with a working browser-only te
 - Arrow Up/Down recalls an in-memory history and restores a pending draft. Tab completes a unique partial command without trapping focus on a completed command. Escape clears the input. Output and history are bounded. Responses use textContent rather than interpolated HTML; open destinations are allowlisted.
 - Inputs start disabled until initialization; no-JS users see a direct Services link. The initial welcome remains visible without scripting.
 - Build and serve the output, then run `npm run test:terminal` (or set `HERR_TEST_URL`). Tests cover eight widths/both themes, equal hero columns, command output, all local destinations, history/completion, literal HTML handling, real pointer/touch links, no-JS fallback, and no API requests or form submissions.
+
+
+### Pixel-art navigation mark
+
+Active headers use `/assets/davy-hexagon-mark-pixel.svg`, a transparent 32×32-grid reinterpretation of the original `davy-hexagon-mark.png` alpha silhouette. Its original dominant lime (#ccff00), proportions, nav sizing, and outer/inner hexagons are preserved; only the edges gain restrained pixel stepping. Original PNGs, favicons, About hero art, and archived page headers remain unchanged. The staff generator inherits the navigation asset from the About shell. Verify with `node tests/nav-pixel-logo.mjs` against the built preview.
