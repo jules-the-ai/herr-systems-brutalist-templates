@@ -1,0 +1,115 @@
+.global-header {
+  position: sticky;
+  z-index: 40;
+}
+
+.global-header .global-nav {
+  overflow: visible;
+}
+
+.nav-dropdown {
+  position: relative;
+  color: #fff;
+}
+
+.nav-dropdown summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.nav-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.global-nav .nav-dropdown summary {
+  padding: 10px 13px;
+  font: 700 12px/1.5 var(--mono);
+  text-transform: uppercase;
+}
+
+.nav-dropdown summary:hover, .nav-dropdown summary:focus-visible, .nav-dropdown[open] > summary, .nav-dropdown.active > summary {
+  background: #d5ff48;
+  color: #16073d;
+}
+
+.nav-dropdown summary:focus-visible {
+  outline: 2px solid #49f5e6;
+  outline-offset: -2px;
+}
+
+.nav-submenu {
+  position: absolute;
+  z-index: 60;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 190px;
+  padding: 8px;
+  border: 1px solid #49f5e6;
+  background: #123b70;
+  box-shadow: 4px 4px 0 #0b0320;
+}
+
+.global-nav .nav-submenu a, .mobile-nav .nav-submenu a {
+  display: block;
+  padding: 12px;
+  color: #fff;
+  font: 700 12px/1.5 var(--mono);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.global-nav .nav-submenu a:hover, .global-nav .nav-submenu a:focus-visible, .global-nav .nav-submenu a.active, .mobile-nav .nav-submenu a:hover, .mobile-nav .nav-submenu a:focus-visible, .mobile-nav .nav-submenu a.active {
+  background: #d5ff48;
+  color: #16073d;
+}
+
+.mobile-nav .mobile-about {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .mobile-nav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    z-index: 50;
+  }
+  .mobile-nav > a, .mobile-nav > .mobile-about {
+    min-width: 0;
+    min-height: 72px;
+  }
+  .mobile-nav .mobile-about {
+    display: block;
+  }
+  .mobile-about > summary {
+    min-height: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #fff;
+    font: 700 13px/1.2 var(--mono);
+    text-transform: uppercase;
+  }
+  .mobile-about > summary > span {
+    color: #d5ff48;
+    font: 400 23.5px/1 var(--pixel);
+  }
+  .mobile-about > summary > b {
+    position: absolute;
+    right: 8px;
+    bottom: 18px;
+    font-size: 12px;
+  }
+  .mobile-about .nav-submenu {
+    top: auto;
+    bottom: calc(100% + 8px);
+    right: -20px;
+    width: 180px;
+  }
+  .mobile-about[open] > summary, .mobile-about.active > summary {
+    color: #16073d;
+  }
+  .mobile-about[open] > summary > span, .mobile-about.active > summary > span {
+    color: #16073d;
+  }
+}

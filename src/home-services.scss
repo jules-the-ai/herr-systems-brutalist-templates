@@ -27,3 +27,7 @@
   .home-services .service-grid { grid-template-columns: minmax(0, 1fr); }
   .home-services .all-services-link { font-size: 12px; }
 }
+
+.home-pricing .home-hourly { margin: 20px 0 0; font: 500 15px/1.3 var(--mono); }
+.home-pricing .home-hourly strong { color: var(--white); font: 700 clamp(40px, 5vw, 64px)/1 var(--sans); letter-spacing: -.05em; }
+.home-pricing .plain-link { display: inline-block; margin-top: 10px; }

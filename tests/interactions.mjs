@@ -23,7 +23,7 @@ try {
   const routes = ['/', '/services/', '/services/billboard/', '/services/web-design/',
     '/case-studies/', '/case-studies/maple-street-workshop/',
     '/case-studies/fieldnote-operations/', '/case-studies/northline-community/',
-    '/about/', '/blog/', '/blog/a-clearer-website/',
+    '/about/', '/pricing/', '/blog/', '/blog/a-clearer-website/',
     '/blog/start-small-with-automation/', '/blog/what-good-hosting-should-cover/', '/contact/'];
   const cardCounts = { '/': 9, '/services/': 6, '/services/billboard/': 4,
     '/case-studies/': 3, '/about/': 3, '/blog/': 3 };
@@ -134,7 +134,7 @@ try {
     await page.keyboard.press('ArrowRight');
     await page.waitForTimeout(500);
     assert(await track.evaluate(c => c.scrollLeft > 0), 'Keyboard scroll works');
-    const navTops = await page.locator('.mobile-nav a').evaluateAll(a => a.map(x => x.getBoundingClientRect().top));
+    const navTops = await page.locator('.mobile-nav > a, .mobile-nav > details').evaluateAll(a => a.map(x => x.getBoundingClientRect().top));
     if (width <= 720) assert.equal(new Set(navTops).size, 1, 'Mobile nav stays one row');
   }
   const touchContext = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });

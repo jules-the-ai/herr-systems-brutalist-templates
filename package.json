@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "styles": "sass src/styles.scss src/generated.css --no-source-map && sass src/services.scss public/services.css --no-source-map && sass src/services-billboard.scss public/services-billboard.css --no-source-map && sass src/service-detail.scss public/service-detail.css --no-source-map && sass src/about.scss public/about.css --no-source-map && sass src/blog.scss public/blog.css --no-source-map && sass src/case-studies.scss public/case-studies.css --no-source-map && sass src/contact.scss public/contact.css --no-source-map",
+    "styles": "sass src/styles.scss src/generated.css --no-source-map && sass src/services.scss public/services.css --no-source-map && sass src/services-billboard.scss public/services-billboard.css --no-source-map && sass src/service-detail.scss public/service-detail.css --no-source-map && sass src/about.scss public/about.css --no-source-map && sass src/blog.scss public/blog.css --no-source-map && sass src/case-studies.scss public/case-studies.css --no-source-map && sass src/contact.scss public/contact.css --no-source-map && sass src/pricing.scss public/pricing.css --no-source-map && sass src/navigation.scss public/navigation.css --no-source-map",
     "dev": "npm run styles && vite",
     "build": "npm run styles && vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "test": "npm run build && node tests/interactions.mjs"
+    "test": "npm run build && node tests/interactions.mjs",
+    "test:pricing": "node tests/pricing.mjs",
+    "test:services": "node tests/services-layout.mjs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",
