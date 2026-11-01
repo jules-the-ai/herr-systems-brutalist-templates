@@ -107,3 +107,15 @@ Edit `src/data/staff.json` for names, roles, bios, skills, working approach, exa
 Do not hand-edit generated profile HTML. Keep sample identities and artwork labeled as demos until real staff content is supplied. The contact buttons go to the real contact template; no personal contact channels or credentials are fabricated. If removing or renaming a profile, also remove its old generated directory after checking that existing links have been updated.
 
 After building and serving dist, run `HERR_TEST_URL=http://127.0.0.1:8096 npm run test:staff` to check three profiles, five viewport widths, both themes, portrait geometry, mobile gutters, section/fragment links, offcanvas, and navigation from team cards. The general interaction suite also covers the three profile routes.
+
+
+## Homepage mock terminal
+
+The homepage hero replaces its decorative monitor with a working browser-only terminal in an equal-width right column above 1000px. It stacks after the introduction on compact screens, retaining the standard mobile menu and a theme-stable dark terminal surface.
+
+- Implementation: `src/mock-terminal.js`; styles: `src/home-terminal.scss`; markup: homepage `index.html`. Vite bundles the module and styles into production assets.
+- Start with `herr -services`, `herr -help`, or the shortcut buttons. Additional commands include `herr -pages`, `herr -about`, `herr -work`, `herr -pricing`, `herr -contact`, `herr -blog`, `herr -team`, `herr -history`, and `clear`. `herr -open web-design` (or another allowlisted page name) actually navigates to its local page. List results contain working native site links.
+- `herr -chat "I need a website"` produces explicitly scripted local replies covering websites, hosting, automation, pricing, and contact. This is NOT connected to an AI model or a shell. No questions or commands are stored, sent, or executed. A future live-chat integration requires a deliberately scoped backend and revised privacy/error handling; never put model credentials in this frontend.
+- Arrow Up/Down recalls an in-memory history and restores a pending draft. Tab completes a unique partial command without trapping focus on a completed command. Escape clears the input. Output and history are bounded. Responses use textContent rather than interpolated HTML; open destinations are allowlisted.
+- Inputs start disabled until initialization; no-JS users see a direct Services link. The initial welcome remains visible without scripting.
+- Build and serve the output, then run `npm run test:terminal` (or set `HERR_TEST_URL`). Tests cover eight widths/both themes, equal hero columns, command output, all local destinations, history/completion, literal HTML handling, real pointer/touch links, no-JS fallback, and no API requests or form submissions.

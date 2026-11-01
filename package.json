@@ -13,7 +13,8 @@
     "test:services": "node tests/services-layout.mjs",
     "test:navigation": "node tests/navigation.mjs",
     "profiles": "node scripts/build-staff.mjs",
-    "test:staff": "node tests/staff-profiles.mjs"
+    "test:staff": "node tests/staff-profiles.mjs",
+    "test:terminal": "node tests/mock-terminal.mjs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",
