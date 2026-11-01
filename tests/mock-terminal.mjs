@@ -13,7 +13,7 @@ try {
  for(const width of [320,390,720,800,1000,1001,1024,1440])for(const theme of ['dark','light']){
   await page.setViewportSize({width,height:1000});await page.goto(base+'/');await page.evaluate(t=>{document.documentElement.dataset.theme=t;document.documentElement.style.scrollBehavior="auto";},theme);await page.evaluate(()=>document.fonts.ready);
   assert(await input.isEnabled());assert.equal(await page.locator('#terminal-title').textContent(),'shell@herr: ~');assert.equal(await page.locator('.terminal-prompt [aria-hidden]').textContent(),'shell@herr:~ $');assert.equal(await page.locator('.monitor').count(),0);
-  assert.equal(await page.locator('.terminal-session-title, .terminal-disclosure, #terminal-hint').count(),0);
+  assert.equal(await page.locator('.terminal-session-title, .terminal-disclosure, #terminal-hint, .terminal-shortcuts, [data-terminal-command]').count(),0);
   assert.equal(await input.getAttribute('aria-describedby'),null);
   assert.equal(await log.evaluate(el=>el.clientHeight),300);
   assert((await log.textContent()).includes('herr -services'));assert.equal(await page.locator('.hero-terminal').count(),1);
@@ -22,7 +22,7 @@ try {
   else assert(terminal.y>=copy.y+copy.height);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`overflow ${width} ${theme}`);
   assert(await log.evaluate(el=>el.scrollWidth<=el.clientWidth));
-  await page.locator('[data-terminal-command="herr -services"]').evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));const scroll=await page.evaluate(()=>scrollY);await page.locator('[data-terminal-command="herr -services"]').click();assert.equal(await log.locator('.terminal-entry:last-child a').count(),6);assert.equal(await page.evaluate(()=>scrollY),scroll);
+  await input.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));await input.focus();const scroll=await page.evaluate(()=>scrollY);await run('herr -services');assert.equal(await log.locator('.terminal-entry:last-child a').count(),6);assert.equal(await page.evaluate(()=>scrollY),scroll);
   await run('herr -chat "I need a website"');assert((await log.locator('.terminal-entry:last-child').textContent()).includes('scripted demo'));
   if([390,1440].includes(width)){await page.reload();await page.evaluate(t=>{document.documentElement.dataset.theme=t;document.documentElement.style.scrollBehavior="auto";},theme);await page.evaluate(()=>scrollTo({top:0,behavior:"instant"}));await page.screenshot({path:`/tmp/herr-terminal-${width}-${theme}.png`,fullPage:true});}
  }
@@ -48,7 +48,7 @@ try {
  const storageKeys=await page.evaluate(()=>Object.keys(localStorage));assert(!storageKeys.some(k=>/terminal|chat|command/.test(k)));assert.deepEqual(submissions,[]);assert.deepEqual(transports,[]);
  await run('herr -open web-design');await page.waitForURL(base+'/services/web-design/');
  await page.goto(base+'/');await run('herr -services');await log.locator('a[href="/services/#hosting"]').click();await page.waitForURL(base+'/services/#hosting');
- const touch=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true});await touch.goto(base+'/');await touch.locator('[data-terminal-command="herr -services"]').tap();assert.equal(await touch.locator('.terminal-entry:last-child a').count(),6);await touch.locator('.terminal-entry:last-child a').first().tap();await touch.waitForURL(base+'/services/web-design/');await touch.close();
+ const touch=await browser.newPage({viewport:{width:390,height:844},hasTouch:true,isMobile:true});await touch.goto(base+'/');await touch.locator('#terminal-command').tap();await touch.locator('#terminal-command').fill('herr -services');await touch.locator('.terminal-form button').tap();assert.equal(await touch.locator('.terminal-entry:last-child a').count(),6);await touch.locator('.terminal-entry:last-child a').first().tap();await touch.waitForURL(base+'/services/web-design/');await touch.close();
  const fallback=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});await fallback.goto(base+'/');assert(await fallback.locator('.terminal-no-js a').isVisible());assert(await fallback.locator('#terminal-command').isDisabled());await fallback.locator('.terminal-no-js a').click();await fallback.waitForURL(base+'/services/');await fallback.close();
  assert.deepEqual(errors,[]);console.log('PASS: terminal half-width/stacked layouts at eight widths in both themes; all mock commands, scripted chat, safe navigation, literal HTML, history, Tab exit, bounded log, real pointer/touch links, no-JS fallback, no POSTs, and no console/asset errors.');
 }finally{await browser.close();}

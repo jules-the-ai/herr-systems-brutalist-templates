@@ -33,8 +33,6 @@
  .terminal-form input {display:block;flex:1;min-width:0;width:0;height:42px;padding:7px 4px;border:0;border-radius:0;background:transparent;color:var(--term-text);caret-color:var(--term-lime);font:400 16px/1.5 var(--mono);box-shadow:none}
  .terminal-form input::placeholder {color:#929fb9;opacity:1}
  .terminal-form button {min-width:36px;min-height:40px;padding:4px;border:1px solid #52617f;background:#191f39;color:var(--term-accent);font:500 18px/1 var(--mono);cursor:pointer}
- .terminal-shortcuts {display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
- .terminal-shortcuts button {min-height:34px;padding:5px 10px;border:1px solid #52617f;background:transparent;color:var(--term-muted);font:400 12px/1.5 var(--mono);cursor:pointer}
  button:hover {background:#202d47;color:var(--term-lime)}
  :is(button,input,a,.terminal-output):focus-visible {outline:2px solid var(--term-accent);outline-offset:3px}
  button:disabled,input:disabled {opacity:.6;cursor:not-allowed}
@@ -54,5 +52,4 @@
  .hero-terminal .terminal-lights {display:none}
  .hero-terminal .terminal-form {gap:6px}
  .hero-terminal .terminal-prompt {font-size:12px}
- .hero-terminal .terminal-shortcuts button {padding:6px 8px}
 }

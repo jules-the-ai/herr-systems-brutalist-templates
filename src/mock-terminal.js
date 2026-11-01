@@ -116,7 +116,6 @@ if (terminal) {
     append(entry);
   }
   terminal.querySelector('form').addEventListener('submit', event => {event.preventDefault(); run(input.value);});
-  terminal.querySelectorAll('[data-terminal-command]').forEach(button => button.addEventListener('click', () => run(button.dataset.terminalCommand)));
   input.addEventListener('keydown', event => {
     if(event.isComposing) return;
     if(event.key === 'ArrowUp') {
