@@ -1,0 +1,10 @@
+// Keep the existing service artwork at icon scale on the homepage only.
+.service-grid .service-icon.service-art {
+  display: block;
+  width: 44px;
+  height: 33px;
+  object-fit: contain;
+  border: 0;
+  background: transparent;
+  image-rendering: pixelated;
+}
