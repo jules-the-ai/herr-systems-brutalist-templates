@@ -25,7 +25,7 @@ try {
     '/case-studies/fieldnote-operations/', '/case-studies/northline-community/',
     '/about/', '/blog/', '/blog/a-clearer-website/',
     '/blog/start-small-with-automation/', '/blog/what-good-hosting-should-cover/', '/contact/'];
-  const cardCounts = { '/': 7, '/services/': 4, '/services/billboard/': 4,
+  const cardCounts = { '/': 9, '/services/': 6, '/services/billboard/': 4,
     '/case-studies/': 3, '/about/': 3, '/blog/': 3 };
   let checked = 0;
   for (const width of [390, 800, 1440]) {

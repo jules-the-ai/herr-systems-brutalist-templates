@@ -82,15 +82,28 @@
 }
 .service-detail .detail-overview {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: clamp(24px, 5vw, 72px);
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 280px);
+  gap: clamp(24px, 3vw, 40px);
   padding: 24px 16px 34px;
 }
 .service-detail .detail-overview > div > p:not(.kicker) {
-  max-width: 58ch;
+  max-width: 72ch;
   color: var(--detail-muted);
   font-size: 17px;
   margin: 12px 0 0;
+}
+.service-detail .detail-sidebar {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  min-width: 0;
+}
+.service-detail .detail-sidebar .mini-panel {
+  padding: 22px;
+}
+.service-detail .detail-sidebar .mini-panel h2 {
+  font: 400 28px/1.2 var(--pixel);
+  letter-spacing: 0.04em;
 }
 .service-detail .detail-fit {
   align-self: start;
