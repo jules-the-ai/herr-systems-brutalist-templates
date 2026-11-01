@@ -59,7 +59,7 @@
   background: #d5ff48;
   border-color: #d5ff48;
   color: #16073d;
-  h2 { margin: 0; color: #16073d; font: 800 clamp(40px, 5vw, 64px)/1.05 var(--sans); letter-spacing: -.05em; text-shadow: none; }
+  h2 { margin: 0; color: #16073d; font: 400 clamp(48px, 6vw, 76px)/1 var(--pixel); letter-spacing: .025em; text-shadow: none; }
   p { max-width: 52ch; margin: 16px 0 0; color: #16073d; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65; }
   .button { background: #16073d; color: #d5ff48; border: 2px solid #16073d; box-shadow: 3px 3px 0 #749a13; padding: 14px 20px; }
   .button:hover, .button:focus-visible { background: #2a1163; color: #d5ff48; filter: none; }
