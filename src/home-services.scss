@@ -48,3 +48,28 @@
 }
 
 .home-pricing .home-rate-note { margin: 10px 0 0; color: var(--soft); font: 400 14px/1.6 var(--sans); }
+
+// A single, high-contrast closing CTA, stable across both color themes.
+:root[data-theme] .home-hire.contact.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  padding: clamp(28px, 4vw, 48px);
+  background: #d5ff48;
+  border-color: #d5ff48;
+  color: #16073d;
+  h2 { margin: 0; color: #16073d; font: 800 clamp(40px, 5vw, 64px)/1.05 var(--sans); letter-spacing: -.05em; text-shadow: none; }
+  p { max-width: 52ch; margin: 16px 0 0; color: #16073d; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65; }
+  .button { background: #16073d; color: #d5ff48; border: 2px solid #16073d; box-shadow: 3px 3px 0 #749a13; padding: 14px 20px; }
+  .button:hover, .button:focus-visible { background: #2a1163; color: #d5ff48; filter: none; }
+  .button:focus-visible { outline: 3px solid #16073d; outline-offset: 4px; }
+}
+@media (max-width: 720px) {
+  :root[data-theme] .home-hire.contact.panel {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 28px 22px;
+    gap: 24px;
+    .button { justify-self: start; }
+  }
+}
