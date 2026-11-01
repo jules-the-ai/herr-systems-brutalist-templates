@@ -12,7 +12,7 @@ try {
  async function run(command){await input.fill(command);await input.press('Enter');}
  for(const width of [320,390,720,800,1000,1001,1024,1440])for(const theme of ['dark','light']){
   await page.setViewportSize({width,height:1000});await page.goto(base+'/');await page.evaluate(t=>{document.documentElement.dataset.theme=t;document.documentElement.style.scrollBehavior="auto";},theme);await page.evaluate(()=>document.fonts.ready);
-  assert(await input.isEnabled());assert.equal(await page.locator('#terminal-title').textContent(),'shell@herr: ~');assert.equal(await page.locator('.terminal-prompt [aria-hidden]').textContent(),'shell@herr:~ $');assert.equal(await page.locator('.monitor').count(),0);
+  assert(await input.isEnabled());assert.equal(await page.locator('#terminal-title').textContent(),'shell@herr: ~');assert.equal(await page.locator('.terminal-prompt [aria-hidden]').textContent(),'>');assert.equal(await page.locator('.monitor').count(),0);
   assert.equal(await page.locator('.terminal-session-title, .terminal-disclosure, #terminal-hint, .terminal-shortcuts, [data-terminal-command]').count(),0);
   assert.equal(await input.getAttribute('aria-describedby'),null);
   assert.equal(await log.evaluate(el=>el.clientHeight),300);
