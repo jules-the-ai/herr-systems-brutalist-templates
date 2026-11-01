@@ -3,12 +3,10 @@
  --profile-muted:#d8d2e5; --profile-panel:#1c0c45; --profile-soft:#241053;
  .billboard-stage .profile-billboard {display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,240px);gap:clamp(28px,6vw,80px);align-items:center}
  .profile-hero-copy {min-width:0}
- .profile-role {color:var(--cyan);font:500 12px/1.6 var(--mono);letter-spacing:.07em;text-transform:uppercase;margin:24px 0 14px}
+ .profile-role {color:var(--cyan);font:500 clamp(17px,1.8vw,21px)/1.5 var(--sans);margin:14px 0 26px}
  .profile-billboard h1 {max-width:none;font-size:clamp(52px,6.5vw,88px);overflow-wrap:break-word}
- .profile-tagline {max-width:46ch;color:var(--profile-muted);font-size:clamp(18px,1.8vw,23px);line-height:1.65;margin:20px 0 24px}
  .profile-hero-actions {display:flex;flex-wrap:wrap;align-items:center;gap:20px}
  .profile-hero-actions>a:not(.button),.profile-text-link {color:var(--cyan);font:700 13px/1.7 var(--mono);text-underline-offset:4px}
- .profile-demo {color:var(--profile-muted);font:500 12px/1.7 var(--mono);margin:22px 0 0}
  .profile-portrait {margin:0;min-width:0}
  .profile-portrait img {display:block;width:100%;height:auto;aspect-ratio:6 / 7;object-fit:cover;border:1px solid var(--line);border-bottom:3px solid var(--cyan)}
  .profile-portrait figcaption {color:var(--profile-muted);font:500 12px/1.6 var(--mono);padding-top:12px}
@@ -61,7 +59,6 @@
  .billboard-stage .profile-billboard {grid-template-columns:1fr;gap:22px}
  .profile-portrait {width:120px;grid-row:1}
  .profile-portrait figcaption {display:none}
- .profile-role {margin-top:18px}
  .profile-billboard h1 {font-size:clamp(48px,12vw,72px)}
  .profile-layout {display:flex;flex-direction:column;gap:28px}
  .profile-sidebar {width:100%}

@@ -12,7 +12,9 @@ try {
   await page.evaluate(t=>{document.documentElement.dataset.theme=t;document.documentElement.style.scrollBehavior='auto';},theme);await page.evaluate(()=>document.fonts.ready);
   assert.equal(await page.locator('h1').count(),1);assert.equal(await page.locator('h1').textContent(),person.name);
   assert.equal(await page.locator('.site-shell > main').count(),1);
-  assert(await page.locator('.profile-demo').isVisible());assert((await page.locator('.profile-demo').textContent()).includes('fictional'));
+  assert.equal(await page.locator('.profile-demo, .profile-tagline').count(),0);
+  assert.equal(await page.locator('#profile-name + .profile-role').textContent(),person.role);
+  assert((await page.locator('.profile-sidebar-note').textContent()).includes('sample content'));
   assert.equal(await page.locator('.profile-skills li').count(),8);assert.equal(await page.locator('.profile-approach li').count(),3);
   assert.equal(await page.locator('.profile-section').count(),4);
   assert.equal(await page.locator('.profile-other-people>div:last-child>a').count(),2);

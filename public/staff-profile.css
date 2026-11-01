@@ -14,22 +14,13 @@
 }
 .staff-profile-page .profile-role {
   color: var(--cyan);
-  font: 500 12px/1.6 var(--mono);
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  margin: 24px 0 14px;
+  font: 500 clamp(17px, 1.8vw, 21px)/1.5 var(--sans);
+  margin: 14px 0 26px;
 }
 .staff-profile-page .profile-billboard h1 {
   max-width: none;
   font-size: clamp(52px, 6.5vw, 88px);
   overflow-wrap: break-word;
-}
-.staff-profile-page .profile-tagline {
-  max-width: 46ch;
-  color: var(--profile-muted);
-  font-size: clamp(18px, 1.8vw, 23px);
-  line-height: 1.65;
-  margin: 20px 0 24px;
 }
 .staff-profile-page .profile-hero-actions {
   display: flex;
@@ -41,11 +32,6 @@
   color: var(--cyan);
   font: 700 13px/1.7 var(--mono);
   text-underline-offset: 4px;
-}
-.staff-profile-page .profile-demo {
-  color: var(--profile-muted);
-  font: 500 12px/1.7 var(--mono);
-  margin: 22px 0 0;
 }
 .staff-profile-page .profile-portrait {
   margin: 0;
@@ -313,9 +299,6 @@
   }
   .staff-profile-page .profile-portrait figcaption {
     display: none;
-  }
-  .staff-profile-page .profile-role {
-    margin-top: 18px;
   }
   .staff-profile-page .profile-billboard h1 {
     font-size: clamp(48px, 12vw, 72px);
