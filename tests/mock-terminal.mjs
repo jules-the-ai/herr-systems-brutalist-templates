@@ -13,6 +13,9 @@ try {
  for(const width of [320,390,720,800,1000,1001,1024,1440])for(const theme of ['dark','light']){
   await page.setViewportSize({width,height:1000});await page.goto(base+'/');await page.evaluate(t=>{document.documentElement.dataset.theme=t;document.documentElement.style.scrollBehavior="auto";},theme);await page.evaluate(()=>document.fonts.ready);
   assert(await input.isEnabled());assert.equal(await page.locator('.monitor').count(),0);
+  assert.equal(await page.locator('.terminal-session-title, .terminal-disclosure, #terminal-hint').count(),0);
+  assert.equal(await input.getAttribute('aria-describedby'),null);
+  assert.equal(await log.evaluate(el=>el.clientHeight),300);
   assert((await log.textContent()).includes('herr -services'));assert.equal(await page.locator('.hero-terminal').count(),1);
   const terminal=await page.locator('.hero-terminal').boundingBox(),copy=await page.locator('.hero-copy').boundingBox();
   if(width>1000){assert(Math.abs(terminal.width-copy.width)<1);assert(terminal.x>copy.x+copy.width);}

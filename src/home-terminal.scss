@@ -16,9 +16,7 @@
  .terminal-lights i:nth-child(3) {background:var(--term-lime)}
  .terminal-badge {font-size:12px;white-space:nowrap;color:var(--term-muted)}
  .terminal-session {padding:18px 18px 14px;min-width:0}
- .terminal-session-title {display:flex;gap:10px;align-items:center;color:var(--term-lime);font:400 24px/1 var(--pixel);margin:0 0 14px}
- .terminal-session-title>span:last-child {margin-left:auto;color:var(--term-muted);font:400 12px/1.5 var(--mono)}
- .terminal-output {height:240px;overflow:auto;overflow-wrap:anywhere;overscroll-behavior:contain;scrollbar-color:#52617f var(--term-bg);scrollbar-width:thin;padding:0 8px 0 0;scroll-padding:12px}
+ .terminal-output {height:300px;overflow:auto;overflow-wrap:anywhere;overscroll-behavior:contain;scrollbar-color:#52617f var(--term-bg);scrollbar-width:thin;padding:0 8px 0 0;scroll-padding:12px}
  .terminal-output p {font:inherit;margin:0 0 12px;color:var(--term-muted)}
  .terminal-output .terminal-hello {color:var(--term-text)}
  code {font:inherit;color:var(--term-lime)}
@@ -40,7 +38,6 @@
  button:hover {background:#202d47;color:var(--term-lime)}
  :is(button,input,a,.terminal-output):focus-visible {outline:2px solid var(--term-accent);outline-offset:3px}
  button:disabled,input:disabled {opacity:.6;cursor:not-allowed}
- .terminal-disclosure {margin:0;padding:10px 18px;border-top:1px solid #29324d;color:var(--term-muted);font:400 12px/1.6 var(--mono)}
  .terminal-no-js {padding:0 18px 16px;font-size:13px;color:var(--term-text)}
  .terminal-sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 }
@@ -57,6 +54,5 @@
  .hero-terminal .terminal-lights {display:none}
  .hero-terminal .terminal-form {gap:6px}
  .hero-terminal .terminal-prompt {font-size:12px}
- .hero-terminal .terminal-disclosure {padding:10px;font-size:12px}
  .hero-terminal .terminal-shortcuts button {padding:6px 8px}
 }
