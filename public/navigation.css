@@ -113,3 +113,22 @@
     color: #16073d;
   }
 }
+@media (max-width: 720px) {
+  .mobile-nav > a > .mobile-nav-art,
+  .mobile-nav .mobile-about > summary > .mobile-nav-art {
+    display: block;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    flex-shrink: 0;
+    object-fit: contain;
+    image-rendering: pixelated;
+    background: #112a53;
+    border-radius: 2px;
+  }
+  .mobile-nav .mobile-about[open] > summary,
+  .mobile-nav .mobile-about.active > summary {
+    background: #d5ff48;
+    color: #16073d;
+  }
+}
