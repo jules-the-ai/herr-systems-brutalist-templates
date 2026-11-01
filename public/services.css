@@ -173,3 +173,11 @@
 .services-list-page .services-directory .service-art figcaption {
   color: var(--directory-muted);
 }
+
+@media (max-width: 720px) {
+  .services-list-page .services-directory .service-art {
+    order: -1;
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
