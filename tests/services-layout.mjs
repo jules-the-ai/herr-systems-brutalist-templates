@@ -4,7 +4,7 @@ const base = process.env.HERR_TEST_URL || 'http://127.0.0.1:8096';
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage();
-  for (const [width, columns] of [[390, 1], [640, 2], [800, 2], [1024, 3], [1440, 3]]) {
+  for (const [width, columns] of [[320, 1], [390, 1], [640, 1], [720, 1], [800, 2], [1024, 3], [1440, 3]]) {
     await page.setViewportSize({ width, height: 1100 });
     for (const theme of ['dark', 'light']) {
       for (const route of ['/', '/services/', '/services/web-design/']) {
@@ -23,6 +23,20 @@ try {
           });
           assert.equal(images.length, 6);
           assert(images.every(i => i.w === 88 && i.h === 66));
+          for(const card of await page.locator('.home-services .service-grid article').all()) {
+            const layout=await card.evaluate(e=>{
+              const image=e.querySelector('img').getBoundingClientRect();
+              const texts=[...e.querySelectorAll('h3,p,a')].map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,b:r.bottom,r:r.right};});
+              const r=e.getBoundingClientRect();
+              return {imageRight:image.right,imageBottom:image.bottom,texts,right:r.right,bottom:r.bottom};
+            });
+            if(width<=720) {
+              assert(layout.texts.every(t=>t.x>=layout.imageRight+15),'All copy beside the art');
+              assert(layout.texts.every(t=>t.r<=layout.right && t.b<=layout.bottom),'Card copy stays inside');
+              assert(layout.texts[0].b<=layout.texts[1].y && layout.texts[1].b<=layout.texts[2].y,'Title/copy/link retain reading order');
+            } else assert(layout.texts[0].y>=layout.imageBottom,'Desktop art stays above title');
+          }
+
           for (const slug of ['consulting', 'contract-work']) {
             await page.locator(`.service-grid a[href="/services/#${slug}"]`).click();
             await page.waitForURL(`**/services/#${slug}`);

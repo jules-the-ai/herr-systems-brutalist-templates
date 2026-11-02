@@ -149,3 +149,7 @@ The experimental fixed `.safari-top-tint` layer was removed after Emily reported
 Emily's iOS 27.0.1 screenshot showed a purple native status area above an otherwise correctly blue non-sticky masthead. The mobile body was still computed purple, even though html/meta were blue. The document canvas is now explicitly blue on both html and body (no body background image), while the original purple/light dotted background is on `.page-surface`, wrapping all content after the masthead. There is no fixed tint strip. On desktop the wrapper is display:contents so it adds no layout box. Staff generation inherits both wrapper boundaries from the About shell.
 
 `node tests/mobile-canvas.mjs` verifies body/root blue, preserved themed surface, balanced wrapper structure, non-sticky headers, no overlay and no overflow; it failed before the body change. This is a structural correction to the remaining purple paint source, NOT a verified claim about native Safari: the iOS 27.0.1 status-bar color still requires physical-device confirmation.
+
+### Compact mobile homepage services
+
+At up to 720px, the six homepage service cards use one full-width column. Each card places its existing 88×66 proportional graphic beside a stacked title, description, and Learn more link. Scoped styles are in `src/home-services.scss`; desktop cards and the service directory are unchanged. Native stretched full-card links and focus/hover behavior are preserved. `tests/services-layout.mjs` checks both internal card geometry and the responsive service grid.
