@@ -15,7 +15,8 @@ try {
   assert(await input.isEnabled());assert.equal(await page.locator('#terminal-title').textContent(),'Herr Systems terminal');assert(await page.locator('#terminal-title').evaluate(e=>e.classList.contains('terminal-sr-only')));assert.equal(await page.locator('.terminal-prompt [aria-hidden]').textContent(),'>');assert.equal(await page.locator('.monitor').count(),0);
   assert.equal(await page.locator('.terminal-session-title, .terminal-disclosure, #terminal-hint, .terminal-shortcuts, [data-terminal-command]').count(),0);
   assert.equal(await input.getAttribute('aria-describedby'),null);
-  assert.equal(await log.evaluate(el=>el.clientHeight),300);
+  if(width>720) assert.equal(await log.evaluate(el=>el.clientHeight),300);
+  else assert(await log.evaluate(el=>el.clientHeight>40 && el.clientHeight<300));
   assert.equal(await log.locator('.terminal-welcome[role=img]').count(),1);
   assert.equal(await log.locator('.terminal-welcome pre').count(),2);
   assert.equal(await log.locator('p,code').count(),0);
@@ -33,7 +34,12 @@ try {
 
   const terminal=await page.locator('.hero-terminal').boundingBox(),copy=await page.locator('.hero-copy').boundingBox();
   if(width>1000){assert(Math.abs(terminal.width-copy.width)<1);assert(terminal.x>copy.x+copy.width);}
-  else assert(terminal.y>=copy.y+copy.height);
+  else if(width<=720) {
+   assert(terminal.y+terminal.height<=copy.y,'Mobile terminal comes first');
+   assert(terminal.height<=terminal.width*4/5+1,'Mobile height capped at 5:4');
+   assert(terminal.height<=360,'Mobile height cap');
+   const field=await input.boundingBox();assert(field.y+field.height<=terminal.y+terminal.height);
+  } else assert(terminal.y>=copy.y+copy.height);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`overflow ${width} ${theme}`);
   assert(await log.evaluate(el=>el.scrollWidth<=el.clientWidth));
   await input.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));await input.focus();const scroll=await page.evaluate(()=>scrollY);await run('herr -services');assert.equal(await log.locator('.terminal-entry:last-child a').count(),6);assert.equal(await page.evaluate(()=>scrollY),scroll);

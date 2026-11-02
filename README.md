@@ -112,7 +112,7 @@ After building and serving dist, run `HERR_TEST_URL=http://127.0.0.1:8096 npm ru
 
 ## Homepage mock terminal
 
-The homepage hero replaces its decorative monitor with a working browser-only terminal in an equal-width right column above 1000px. It stacks after the introduction on compact screens, retaining the standard mobile menu and a theme-stable dark terminal surface.
+The homepage hero replaces its decorative monitor with a working browser-only terminal in an equal-width right column above 1000px. It stacks above the introduction on mobile (up to 720px), with a 5:4 aspect ratio and 360px maximum height; scrollback flexes while the command input stays visible. At 721–1000px it stacks after the introduction. The standard mobile menu and theme-stable dark surface are preserved.
 
 - Implementation: `src/mock-terminal.js`; styles: `src/home-terminal.scss`; markup: homepage `index.html`. Vite bundles the module and styles into production assets.
 - Start with `herr -services`, `herr -help` in the command input. Additional commands include `herr -pages`, `herr -about`, `herr -work`, `herr -pricing`, `herr -contact`, `herr -blog`, `herr -team`, `herr -history`, and `clear`. `herr -open web-design` (or another allowlisted page name) actually navigates to its local page. List results contain working native site links.
