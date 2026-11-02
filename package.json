@@ -14,7 +14,8 @@
     "test:navigation": "node tests/navigation.mjs",
     "profiles": "node scripts/build-staff.mjs",
     "test:staff": "node tests/staff-profiles.mjs",
-    "test:terminal": "node tests/mock-terminal.mjs"
+    "test:terminal": "node tests/mock-terminal.mjs",
+    "test:forms": "node tests/inquiry-forms.mjs"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.0",

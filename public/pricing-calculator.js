@@ -1,21 +1,50 @@
-// Sample fixed-scope prices in USD; confirmed hourly rate is separate.
+// USD planning samples, not binding quotes. Only the hourly rate is confirmed.
 export const HOURLY_RATE = 70;
+export const SERVICES = Object.freeze({ web: 'Web Design / Web Development', hosting: 'Hosting', agentic: 'Agentic Setups', consulting: 'Consulting', contract: 'Contract Work' });
 export const FEATURES = Object.freeze({
-  ecommerce: { label: 'Ecommerce', price: 700 },
-  ai: { label: 'AI Automation', price: 420 },
-  cms: { label: 'Editable content / blog', price: 210 },
-  booking: { label: 'Online booking', price: 210 },
-  integration: { label: 'Business integration', price: 140 },
-  development: { label: 'Custom development', price: 280 },
-  consulting: { label: 'Technical consulting', price: 140 },
+  ecommerce: { service: 'web', label: 'Ecommerce', price: 700 },
+  cms: { service: 'web', label: 'Editable content / blog', price: 210 },
+  booking: { service: 'web', label: 'Online booking', price: 210 },
+  integration: { service: 'web', label: 'Business integration', price: 140 },
+  agentReview: { service: 'agentic', label: 'Additional evaluation and handoff', price: 210 },
+  agentIntegration: { service: 'agentic', label: 'Additional tool connection', price: 140 },
 });
-export const HOSTING = Object.freeze({ none: { label: 'Self-managed hosting', price: 0 }, hosting: { label: 'Hosting & backups', price: 35 }, managed: { label: 'Hosting & routine maintenance', price: 70 } });
-export function calculateEstimate({ templates = 5, design = 'standard', features = [], hosting = 'none' } = {}) {
-  templates = Number(templates);
-  templates = Number.isFinite(templates) ? Math.min(20, Math.max(1, Math.round(templates))) : 5;
-  const lines = [{ label: `Website · ${templates} ${templates === 1 ? 'page template' : 'page templates'}`, price: 280 + (templates - 1) * 70 }];
-  if (design === 'custom') lines.push({ label: 'Custom visual direction', price: 350 });
-  for (const key of new Set(features)) if (Object.hasOwn(FEATURES, key)) lines.push(FEATURES[key]);
-  const support = Object.hasOwn(HOSTING, hosting) ? HOSTING[hosting] : HOSTING.none;
-  return { templates, lines, total: lines.reduce((sum, line) => sum + line.price, 0), monthly: support.price, support: support.label };
+export const HOSTING = Object.freeze({ hosting: { label: 'Hosting and backups', price: 35 }, managed: { label: 'Hosting and routine maintenance', price: 70 } });
+const list = value => Array.isArray(value) ? value : [];
+const own = (object, key) => typeof key === 'string' && Object.hasOwn(object, key);
+function bounded(value, fallback, max) {
+  if (!['number', 'string'].includes(typeof value) || value === '' || (typeof value === 'string' && !value.trim())) return fallback;
+  const number = Number(value);
+  return Number.isFinite(number) ? Math.min(max, Math.max(1, Math.round(number))) : fallback;
+}
+export function calculateEstimate(input = {}) {
+  if (!input || typeof input !== 'object') input = {};
+  const services = Object.keys(SERVICES).filter(key => list(input.services).includes(key));
+  const selected = new Set(services);
+  const options = {};
+  const lines = [];
+  if (selected.has('web')) {
+    options.templates = bounded(input.templates, 5, 20);
+    options.design = input.design === 'custom' ? 'custom' : 'standard';
+    lines.push({ service: 'web', label: `Website · ${options.templates} ${options.templates === 1 ? 'page template' : 'page templates'}`, price: 280 + (options.templates - 1) * 70 });
+    if (options.design === 'custom') lines.push({ service: 'web', label: 'Custom visual direction', price: 350 });
+  }
+  if (selected.has('agentic')) lines.push({ service: 'agentic', label: 'One focused assistant / workflow', price: 420 });
+  const features = [...new Set(list(input.features))].filter(key => own(FEATURES, key) && selected.has(FEATURES[key].service));
+  if (selected.has('web') || selected.has('agentic')) options.features = features;
+  for (const key of features) lines.push({ ...FEATURES[key] });
+  for (const service of ['consulting', 'contract']) if (selected.has(service)) {
+    const hours = bounded(input[`${service}Hours`], service === 'consulting' ? 2 : 4, 160);
+    const topics = service === 'consulting' ? ['planning', 'review', 'architecture'] : ['development', 'maintenance', 'team'];
+    options[`${service}Hours`] = hours;
+    options[`${service}Focus`] = topics.includes(input[`${service}Focus`]) ? input[`${service}Focus`] : topics[0];
+    lines.push({ service, label: `${SERVICES[service]} · ${hours} ${hours === 1 ? 'hour' : 'hours'} at $70/hr`, price: hours * HOURLY_RATE });
+  }
+  let monthly = 0;
+  let support = 'No hosting selected';
+  if (selected.has('hosting')) {
+    options.hosting = own(HOSTING, input.hosting) ? input.hosting : 'hosting';
+    ({ price: monthly, label: support } = HOSTING[options.hosting]);
+  }
+  return { services, options, lines, total: lines.reduce((sum, line) => sum + line.price, 0), monthly, support };
 }

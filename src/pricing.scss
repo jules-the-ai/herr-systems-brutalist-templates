@@ -82,3 +82,31 @@
  .pricing-page .pricing-select::before,.pricing-page .pricing-select::after {display:none}
  .pricing-page .pricing-select select {appearance:auto;-webkit-appearance:auto;padding-right:14px}
 }
+
+// Service-specific controls and stacked inquiry fields; the shared shell is unchanged.
+.pricing-page {
+ #estimate-form,.estimate-fields {min-width:0}
+ .service-options {display:grid;gap:12px}
+ .service-options .feature-option small {margin-bottom:0}
+ .service-group {min-width:0;margin-inline:0}
+ .service-group[hidden] {display:none}
+ .service-group > legend {padding:0 8px;font:700 22px/1.3 var(--sans)}
+ .service-group h4 {font-size:16px;margin:26px 0 14px}
+ .quote-contact {display:grid;gap:12px}
+ .quote-contact h3,.quote-contact p {margin:0 0 8px}
+ .quote-contact label {font-size:14px;font-weight:700}
+ .quote-contact input:not([type=hidden]),.quote-contact textarea,.service-group input[type=number] {box-sizing:border-box;min-width:0;width:100%;min-height:54px;border:1px solid var(--line);border-radius:0;padding:13px 14px;background:var(--pricing-input);color:var(--white);font:400 16px/1.6 var(--sans)}
+ .quote-contact textarea {resize:vertical}
+ .service-group input[type=number] {margin-bottom:20px}
+ textarea:focus-visible {outline:3px solid var(--cyan);outline-offset:4px}
+ #scope-summary {font-size:14px;line-height:1.7;color:var(--pricing-muted);overflow-wrap:anywhere}
+ .submit-status {font-size:13px;line-height:1.7;color:var(--pricing-muted);overflow-wrap:anywhere}
+ [data-submit-button] {min-height:50px;cursor:pointer}
+ [data-submit-button]:disabled {opacity:.6;cursor:not-allowed}
+ [aria-invalid=true] {border-color:var(--cyan)!important;outline:2px solid var(--cyan);outline-offset:2px}
+ .mobile-estimate > span {min-width:0}
+ .mobile-estimate a {flex-shrink:0}
+}
+
+// Keep text links readable on pale surfaces despite shared link-interaction rules.
+:root[data-theme=light] .pricing-page .pricing-main a:not(.button) {color:var(--cyan)}
