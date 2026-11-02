@@ -14,11 +14,20 @@
  .terminal-lights i {display:block;width:7px;height:7px;background:#71809b}
  .terminal-lights i:nth-child(2) {background:var(--term-accent)}
  .terminal-lights i:nth-child(3) {background:var(--term-lime)}
- .terminal-badge {font-size:12px;white-space:nowrap;color:var(--term-muted)}
  .terminal-session {padding:18px 18px 14px;min-width:0}
  .terminal-output {height:300px;overflow:auto;overflow-wrap:anywhere;overscroll-behavior:contain;scrollbar-color:#52617f var(--term-bg);scrollbar-width:thin;padding:0 8px 0 0;scroll-padding:12px}
  .terminal-output p {font:inherit;margin:0 0 12px;color:var(--term-muted)}
- .terminal-output .terminal-hello {color:var(--term-text)}
+ // Small glyphs are illustration pixels, not utility text; the accessible name is on the artwork.
+ .terminal-welcome {display:flex;min-height:100%;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:4px 0;container-type:inline-size}
+ .terminal-welcome pre {margin:0;white-space:pre;overflow-wrap:normal;letter-spacing:0;text-align:left}
+ .terminal-mark {font:400 12px/1 var(--mono);color:var(--term-lime);text-shadow:0 0 14px rgb(213 255 72 / .14)}
+ .terminal-mark span:nth-child(-n+4) {color:#a4c869}
+ .terminal-mark span:nth-child(n+10) {color:#8cddb5}
+ .terminal-wordmark {display:grid;justify-items:center;gap:10px;max-width:100%}
+ .terminal-wordmark pre {font:400 clamp(6px,1.68cqw,8px)/1.05 var(--mono);color:var(--term-accent)}
+ .terminal-wordmark span:nth-child(-n+2) {color:#9cfbf0}
+ .terminal-wordmark span:nth-child(n+5) {color:#51b7c8}
+
  code {font:inherit;color:var(--term-lime)}
  .terminal-entry {padding:0 0 10px;margin:0 0 12px;border-bottom:1px solid #29324d}
  .terminal-output .terminal-echo {color:var(--term-accent);margin-bottom:12px;white-space:pre-wrap}

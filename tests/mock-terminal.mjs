@@ -12,11 +12,19 @@ try {
  async function run(command){await input.fill(command);await input.press('Enter');}
  for(const width of [320,390,720,800,1000,1001,1024,1440])for(const theme of ['dark','light']){
   await page.setViewportSize({width,height:1000});await page.goto(base+'/');await page.evaluate(t=>{document.documentElement.dataset.theme=t;document.documentElement.style.scrollBehavior="auto";},theme);await page.evaluate(()=>document.fonts.ready);
-  assert(await input.isEnabled());assert.equal(await page.locator('#terminal-title').textContent(),'shell@herr: ~');assert.equal(await page.locator('.terminal-prompt [aria-hidden]').textContent(),'>');assert.equal(await page.locator('.monitor').count(),0);
+  assert(await input.isEnabled());assert.equal(await page.locator('#terminal-title').textContent(),'Herr Systems terminal');assert(await page.locator('#terminal-title').evaluate(e=>e.classList.contains('terminal-sr-only')));assert.equal(await page.locator('.terminal-prompt [aria-hidden]').textContent(),'>');assert.equal(await page.locator('.monitor').count(),0);
   assert.equal(await page.locator('.terminal-session-title, .terminal-disclosure, #terminal-hint, .terminal-shortcuts, [data-terminal-command]').count(),0);
   assert.equal(await input.getAttribute('aria-describedby'),null);
   assert.equal(await log.evaluate(el=>el.clientHeight),300);
-  assert((await log.textContent()).includes('herr -services'));assert.equal(await page.locator('.hero-terminal').count(),1);
+  assert.equal(await log.locator('.terminal-welcome[role=img]').count(),1);
+  assert.equal(await log.locator('.terminal-welcome pre').count(),3);
+  assert.equal(await log.locator('p,code').count(),0);
+  assert.equal(await page.locator('.terminal-badge').count(),0);
+  assert.equal(await input.getAttribute('placeholder'),null);
+  assert.equal(await log.locator('.terminal-entry').count(),0);
+  assert.equal(await page.locator('.hero-terminal').count(),1);
+  assert(await log.evaluate(el=>el.scrollHeight<=el.clientHeight),'Startup art fits without vertical scrolling');
+  assert(await log.locator('.terminal-wordmark').evaluate(el=>el.scrollWidth<=el.clientWidth),'Wordmark does not clip');
   const terminal=await page.locator('.hero-terminal').boundingBox(),copy=await page.locator('.hero-copy').boundingBox();
   if(width>1000){assert(Math.abs(terminal.width-copy.width)<1);assert(terminal.x>copy.x+copy.width);}
   else assert(terminal.y>=copy.y+copy.height);
