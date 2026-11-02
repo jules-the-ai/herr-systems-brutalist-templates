@@ -17,14 +17,20 @@ try {
   assert.equal(await input.getAttribute('aria-describedby'),null);
   assert.equal(await log.evaluate(el=>el.clientHeight),300);
   assert.equal(await log.locator('.terminal-welcome[role=img]').count(),1);
-  assert.equal(await log.locator('.terminal-welcome pre').count(),3);
+  assert.equal(await log.locator('.terminal-welcome pre').count(),2);
   assert.equal(await log.locator('p,code').count(),0);
   assert.equal(await page.locator('.terminal-badge').count(),0);
-  assert.equal(await input.getAttribute('placeholder'),null);
+  assert.equal(await input.getAttribute('placeholder'),'herr -help');
+  assert.equal(await input.getAttribute('title'),'Type herr -help and press Enter for commands and info');
   assert.equal(await log.locator('.terminal-entry').count(),0);
   assert.equal(await page.locator('.hero-terminal').count(),1);
   assert(await log.evaluate(el=>el.scrollHeight<=el.clientHeight),'Startup art fits without vertical scrolling');
   assert(await log.locator('.terminal-wordmark').evaluate(el=>el.scrollWidth<=el.clientWidth),'Wordmark does not clip');
+  assert.equal(await log.locator('.terminal-wordmark pre').count(),1);
+  assert.equal(await log.locator('.terminal-wordmark pre span').count(),6);
+  assert.equal(await log.locator('.terminal-wordmark pre').evaluate(el=>getComputedStyle(el).color),'rgb(213, 255, 72)');
+  assert(await log.locator('.terminal-wordmark pre').evaluate(el=>parseFloat(getComputedStyle(el).fontSize)<=6));
+
   const terminal=await page.locator('.hero-terminal').boundingBox(),copy=await page.locator('.hero-copy').boundingBox();
   if(width>1000){assert(Math.abs(terminal.width-copy.width)<1);assert(terminal.x>copy.x+copy.width);}
   else assert(terminal.y>=copy.y+copy.height);

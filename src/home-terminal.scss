@@ -23,10 +23,8 @@
  .terminal-mark {font:400 12px/1 var(--mono);color:var(--term-lime);text-shadow:0 0 14px rgb(213 255 72 / .14)}
  .terminal-mark span:nth-child(-n+4) {color:#a4c869}
  .terminal-mark span:nth-child(n+10) {color:#8cddb5}
- .terminal-wordmark {display:grid;justify-items:center;gap:10px;max-width:100%}
- .terminal-wordmark pre {font:400 clamp(6px,1.68cqw,8px)/1.05 var(--mono);color:var(--term-accent)}
- .terminal-wordmark span:nth-child(-n+2) {color:#9cfbf0}
- .terminal-wordmark span:nth-child(n+5) {color:#51b7c8}
+ .terminal-wordmark {display:flex;justify-content:center;max-width:100%}
+ .terminal-wordmark pre {font:400 clamp(3px,1.6cqw,6px)/1.05 var(--mono);color:var(--term-lime)}
 
  code {font:inherit;color:var(--term-lime)}
  .terminal-entry {padding:0 0 10px;margin:0 0 12px;border-bottom:1px solid #29324d}
