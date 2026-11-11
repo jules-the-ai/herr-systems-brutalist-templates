@@ -73,9 +73,11 @@ export async function verifyPalette(page, {route, width, theme}) {
   assert.equal(result.title, "rgb(191, 255, 68)", `Hero accent: ${context}`);
   if (theme === "light") assert.equal(result.background,"rgb(242, 242, 233)",`Paper: ${context}`);
   assert.deepEqual(result.failures, [], `Palette contrast: ${context}`);
-  // Exercise real pointer and keyboard states, not only default declarations.
+  // Background controls are inert while the native navigation modal is open.
+  // Its palette is still checked above; exercise background states only when usable.
+  const modalOpen = await page.evaluate(()=>!!document.querySelector("dialog:modal"));
   for (const button of await page.locator(".hero .button,.page-intro .button,.estimate-summary .button").all()) {
-    if (!await button.isVisible()) continue;
+    if (modalOpen || !await button.isVisible()) continue;
     for (const state of ["hover","focus"]) {
       if (state === "hover") await button.hover(); else await button.focus();
       await page.waitForTimeout(170);

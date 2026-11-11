@@ -3,6 +3,18 @@ import { verifyPalette } from "./brutalist-palette.mjs";
 
 export async function verifyNavigation(browser, origin) {
   const errors=[];
+  async function verifyCapabilities(page,width,theme){
+    assert.equal(await page.locator("html").getAttribute("data-theme"),theme);
+    const styles=await page.evaluate(()=>{
+      const section=document.querySelector(".services"), next=document.querySelector(".work"), heading=section.querySelector(".section-heading"), hero=document.querySelector(".hero-band");
+      const cs=getComputedStyle(section), body=getComputedStyle(document.body), card=getComputedStyle(section.querySelector(".service"));
+      return {bg:cs.backgroundColor,fg:cs.color,bodyBg:body.backgroundColor,bodyFg:body.color,border:card.borderRightColor,left:heading.getBoundingClientRect().left,nextLeft:next.getBoundingClientRect().left+parseFloat(getComputedStyle(next).paddingLeft),outerLeft:section.getBoundingClientRect().left,topGap:section.getBoundingClientRect().top-hero.getBoundingClientRect().bottom};
+    });
+    assert.equal(styles.bg,styles.bodyBg,`Capabilities background ${width}/${theme}`);
+    assert.equal(styles.fg,styles.bodyFg);assert.equal(styles.border,styles.bodyFg);
+    assert.ok(Math.abs(styles.left-styles.nextLeft)<1,`Shared content gutters ${width}/${theme}: ${JSON.stringify(styles)}`);
+    assert.ok(Math.abs(styles.topGap)<1,`No double top spacing: ${JSON.stringify(styles)}`);
+  }
   const p=await browser.newPage();
   p.on("pageerror", e=>errors.push(e.message));
   const load=async (route,theme)=>{
@@ -25,8 +37,7 @@ export async function verifyNavigation(browser, origin) {
       assert.equal(await p.locator(".masthead a[href=\"/templates/\"],#site-menu a[href=\"/templates/\"]").count(),0);
       const boxes=await nav.locator(":scope > *").evaluateAll(es=>es.map(e=>{const r=e.getBoundingClientRect();return {y:r.y,bottom:r.bottom}}));
       assert.ok(boxes.every(r=>Math.abs(r.y-boxes[0].y)<1 && Math.abs(r.bottom-900)<1));
-      const gap=await p.evaluate(()=>{const r=document.querySelector(".services").getBoundingClientRect();return {x:r.left,gap:r.top-document.querySelector(".hero-band").getBoundingClientRect().bottom}});
-      assert.ok(Math.abs(gap.x-gap.gap)<1,`Capabilities gutters ${width}/${theme}: ${JSON.stringify(gap)}`);
+      await verifyCapabilities(p,width,theme);
       const opener=nav.getByRole("button",{name:"More",exact:true});
       await opener.click(); await p.waitForTimeout(200);
       assert.equal(await p.locator("#site-menu").evaluate(e=>e.matches(":modal")),true);
@@ -63,7 +74,9 @@ export async function verifyNavigation(browser, origin) {
       assert.equal(await p.locator(".mobile-nav").isVisible(),false);
       assert.equal(await p.locator(".brand-tools .theme").count(),1);
       assert.equal(await desktop.locator("a").first().evaluate(e=>getComputedStyle(e).fontSize),"16px");
-      const geometry=await p.evaluate(()=>{const r=document.querySelector(".services").getBoundingClientRect();const h=document.querySelector(".hero-band").getBoundingClientRect();return {gap:r.top-h.bottom,left:r.left}});assert.ok(Math.abs(geometry.gap-geometry.left)<1,JSON.stringify(geometry));
+      await verifyCapabilities(p,width,theme);
+      const alignment=await p.evaluate(()=>({nav:document.querySelector(".masthead > nav").getBoundingClientRect().right,header:document.querySelector(".masthead").getBoundingClientRect().right}));
+      assert.ok(Math.abs(alignment.nav-alignment.header)<1,`Right-aligned desktop nav ${width}/${theme}: ${JSON.stringify(alignment)}`);
       await p.evaluate(()=>scrollTo({top:600,behavior:"instant"}));await p.waitForTimeout(50);
       const sticky=await p.locator(".masthead-band").evaluate(e=>{const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {top:r.top,left:r.left,right:r.right,width:document.documentElement.clientWidth,bg:s.backgroundColor,border:s.borderBottomColor,borderWidth:s.borderBottomWidth}});
       assert.equal(sticky.top,0);assert.equal(sticky.left,0);assert.equal(sticky.right,sticky.width);assert.equal(sticky.bg,"rgb(39, 46, 228)");assert.equal(sticky.border,"rgb(242, 242, 233)");assert.equal(sticky.borderWidth,"1px");
