@@ -41,3 +41,7 @@ Temporary LAN server: http://192.168.0.129:8105/
 All page samples: http://192.168.0.129:8105/templates/
 Local source: /home/syzygy/herr-systems-brutalist-templates
 The initial one-page concept remains separately available on port 8104.
+
+## Revised blue-surface palette
+
+The current `npm test` matrix additionally checks computed text/background contrast on every visible hero and emphasis panel, theme state, lime hero accents, the lighter warm-paper body, and absence of blue shadows behind lime buttons. Hero and estimate CTA hover/focus states are exercised in both themes. Normal copy must meet 4.5:1 and large text 3:1. All 240 route/width/theme combinations passed. Screenshots were visually inspected for desktop home in both themes, mobile light About, and desktop light pricing. A separate LAN-served smoke check populated all five service groups with managed hosting and verified the estimate text and CTA states in both themes. This revision was tested in Chromium; the earlier Firefox smoke above is historical, not a claim of rerunning Firefox for this palette update.

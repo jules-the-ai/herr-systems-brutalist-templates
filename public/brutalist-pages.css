@@ -22,8 +22,8 @@
 :where(body:not(.home-page)) main :where(.detail-breadcrumb,.contact-breadcrumb,.breadcrumb){display:flex;flex-wrap:wrap;gap:10px;align-items:center;font:12px/1.6 var(--mono);color:var(--muted);margin-bottom:28px}
 :where(body:not(.home-page)) main [aria-current=page]{color:var(--fg)}
 :where(body:not(.home-page)) main :where(.detail-actions,.profile-hero-actions,.desk-context-links){display:flex;flex-wrap:wrap;align-items:center;gap:24px;margin-top:28px}
-:where(body:not(.home-page)) main .button{background:var(--lime);color:var(--ink);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--blue);font:13px/1.4 var(--mono);text-decoration:none;max-width:100%}
-:where(body:not(.home-page)) main .button:hover{box-shadow:2px 2px 0 var(--blue)}
+:where(body:not(.home-page)) main .button{background:var(--lime);color:var(--ink);border:2px solid var(--ink);box-shadow:none;font:13px/1.4 var(--mono);text-decoration:none;max-width:100%}
+:where(body:not(.home-page)) main .button:hover{box-shadow:none}
 :where(body:not(.home-page)) main .button b{font:26px/1 var(--pixel)}
 :where(body:not(.home-page)) main :where(.detail-section,.profile-section){margin-top:var(--page-gap)}
 :where(body:not(.home-page)) main :where(.detail-section-heading,.directory-heading){margin-bottom:32px}
@@ -295,5 +295,15 @@ html[data-theme=light] :where(body:not(.home-page)) main select{color-scheme:lig
 
 /* Outrank the approved shared .contact display rules on internal CTA panels only. */
 :where(body:not(.home-page)) main .contact.panel h2{font:clamp(38px,4.6vw,70px)/1 var(--pixel);margin:0 0 18px}
-:where(body:not(.home-page)) main .contact.panel .button{font:13px/1.4 var(--mono);background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--blue)}
+:where(body:not(.home-page)) main .contact.panel .button{font:13px/1.4 var(--mono);background:var(--ink);color:var(--paper);box-shadow:none}
 :where(body:not(.home-page)) main .contact.panel h2 em{font-style:normal}
+
+/* Shared billboard and emphasis panels. Scoped semantic tokens also cover
+   metadata, separators and dynamically inserted estimator text. */
+:where(body:not(.home-page)) main :is(.page-intro,.estimate-summary,.mobile-estimate,.detail-fit,.profile-skill-panel,.profile-facts,.case-callout,.article-takeaway,.detail-process-panel,.post-feature){--fg:var(--on-blue);--muted:var(--on-blue);--line:var(--blue-line);background:var(--blue);color:var(--on-blue);box-shadow:none}
+:where(body:not(.home-page)) main .page-intro{padding:clamp(28px,3.8vw,52px);border-color:var(--blue-line)}
+:where(body:not(.home-page)) main .page-intro h1{color:var(--lime)}
+:where(body:not(.home-page)) main :is(.detail-fit,.case-callout,.article-takeaway){border-color:var(--blue-line)}
+:where(body:not(.home-page)) main .profile-portrait img{box-shadow:none}
+:where(body:not(.home-page)) main .estimate-summary{margin-right:0}
+:where(body:not(.home-page)) main :is(.contact.panel,.profile-connect,.case-next) .button:hover{box-shadow:none}

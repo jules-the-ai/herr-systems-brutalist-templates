@@ -1,3 +1,4 @@
+import { verifyPalette } from "./brutalist-palette.mjs";
 import { chromium } from "playwright";
 import { createServer } from "node:http";
 import { readFile, stat, readdir, mkdir, writeFile } from "node:fs/promises";
@@ -127,6 +128,7 @@ try {
           data.ids.length,
           "Duplicate IDs: " + route,
         );
+        await verifyPalette(page, { route, width, theme });
         results.push({ route, width, theme });
         index.set(route, data);
         if ([375, 1440].includes(width))
