@@ -38,6 +38,13 @@ export async function verifyPalette(page, {route, width, theme}) {
     for (const e of document.querySelectorAll("main .service-entry")) {
       if (visible(e) && getComputedStyle(e).boxShadow !== "none") failures.push("Offset shadow behind service card");
     }
+    const logo = document.querySelector(".masthead .brand-mark img");
+    if (!logo || !logo.complete || !logo.naturalWidth || !logo.getAttribute("src").endsWith("/davy-hexagon-mark-pixel.svg")) failures.push("Missing live-site logo asset");
+    if (logo) {
+      const r=logo.getBoundingClientRect();
+      if (Math.abs(r.width-r.height)>1 || r.width<40 || r.width>48) failures.push("Incorrect logo proportions");
+      if (getComputedStyle(logo.parentElement).borderWidth !== "0px") failures.push("Obsolete boxed logo treatment");
+    }
     const headerBand = document.querySelector(".masthead-band");
     const heroBand = document.querySelector("main>.hero-band");
     for (const e of [headerBand, heroBand]) {
