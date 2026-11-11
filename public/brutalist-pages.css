@@ -38,7 +38,7 @@
 :where(body:not(.home-page)) main .detail-billboard-art img{width:100%}
 /* Services */
 :where(body:not(.home-page)) main .service-list{display:grid;gap:32px}
-:where(body:not(.home-page)) main .service-entry{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(230px,.75fr);gap:48px;padding:clamp(24px,3.5vw,52px);border:1px solid var(--line);box-shadow:7px 7px 0 var(--blue);align-items:center}
+:where(body:not(.home-page)) main .service-entry{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(230px,.75fr);gap:48px;padding:clamp(24px,3.5vw,52px);border:1px solid var(--line);box-shadow:none;align-items:center}
 :where(body:not(.home-page)) main .service-entry h3{font-size:clamp(38px,4.4vw,64px)}
 :where(body:not(.home-page)) main .service-description{max-width:650px;font-size:18px}
 :where(body:not(.home-page)) main .service-art{max-width:480px;width:100%;justify-self:center}

@@ -35,6 +35,9 @@ export async function verifyPalette(page, {route, width, theme}) {
     for (const e of document.querySelectorAll("main .button")) {
       if (visible(e) && getComputedStyle(e).backgroundColor === lime && getComputedStyle(e).boxShadow.includes("39, 46, 228")) failures.push("Blue offset shadow behind lime button");
     }
+    for (const e of document.querySelectorAll("main .service-entry")) {
+      if (visible(e) && getComputedStyle(e).boxShadow !== "none") failures.push("Offset shadow behind service card");
+    }
     const hero = document.querySelector(".hero,.page-intro");
     const title = document.querySelector(".hero .fun,.page-intro h1");
     return {failures, minimum:Math.min(...ratios), hero:!!hero, title:getComputedStyle(title).color, theme:document.documentElement.dataset.theme, background:getComputedStyle(document.body).backgroundColor};
