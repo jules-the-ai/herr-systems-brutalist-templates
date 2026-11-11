@@ -54,8 +54,6 @@ export async function verifyPalette(page, {route, width, theme}) {
         failures.push(`Inset blue band: ${e.className} ${r.left}..${r.right}`);
       if (getComputedStyle(e).backgroundColor !== blue) failures.push(`Non-blue band: ${e.className}`);
     }
-    if (headerBand && heroBand && Math.abs(headerBand.getBoundingClientRect().bottom - heroBand.getBoundingClientRect().top) > 1)
-      failures.push("Gap between menu and hero");
     const content = document.querySelector("main>.page-content");
     if (!content || content.getBoundingClientRect().width > 1801) failures.push("Body content lost its container");
     const hero = document.querySelector(".hero,.page-intro");

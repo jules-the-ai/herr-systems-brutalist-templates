@@ -1,3 +1,4 @@
+import { verifyNavigation } from "./brutalist-navigation.mjs";
 import { verifyPalette } from "./brutalist-palette.mjs";
 import { chromium } from "playwright";
 import { createServer } from "node:http";
@@ -163,16 +164,16 @@ try {
   }
   await page.setViewportSize({ width: 375, height: 900 });
   await page.goto(origin + "/");
-  await page.locator(".mobile-menu summary").click();
+  await page.locator("[data-menu-open]").click();
   await page
-    .getByRole("navigation", { name: "Mobile navigation" })
+    .getByRole("navigation", { name: "All pages" })
     .getByRole("link", { name: "Blog", exact: true })
     .click();
   assert.ok(page.url().endsWith("/blog/"));
-  await page.locator(".mobile-menu summary").click();
+  await page.locator("[data-menu-open]").click();
   await page.keyboard.press("Escape");
   assert.equal(
-    await page.locator(".mobile-menu").evaluate((e) => e.open),
+    await page.locator("#site-menu").evaluate((e) => e.open),
     false,
   );
   await page.goto(origin + "/contact/");
@@ -206,6 +207,7 @@ try {
   );
   assert.deepEqual(posts, [], "Preview sent POST requests");
   assert.deepEqual(faults, [], "Browser errors");
+  await verifyNavigation(browser, origin);
   process.env.HERR_TEST_URL = origin;
   await import("./brutalist-expanded.mjs");
   await writeFile(
