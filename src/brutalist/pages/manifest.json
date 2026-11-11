@@ -1,0 +1,198 @@
+[
+  {
+    "route": "/about/",
+    "title": "About",
+    "description": "Meet the people and principles behind Herr Systems: thoughtful design, dependable development, and useful technology.",
+    "bodyClass": "services-billboard-variant service-detail-page about-page",
+    "fragment": "about/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/about/team/alex-morgan/",
+    "title": "Alex Morgan — Design and Strategy",
+    "description": "Demo staff profile for Alex Morgan: Design and Strategy. Explore their bio, skills, and approach.",
+    "bodyClass": "services-billboard-variant service-detail-page staff-profile-page",
+    "fragment": "about/team/alex-morgan/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/about/team/jordan-ellis/",
+    "title": "Jordan Ellis — Client care & projects",
+    "description": "Demo staff profile for Jordan Ellis: Client care & projects. Explore their bio, skills, and approach.",
+    "bodyClass": "services-billboard-variant service-detail-page staff-profile-page",
+    "fragment": "about/team/jordan-ellis/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/about/team/sam-rivera/",
+    "title": "Sam Rivera — Development & systems",
+    "description": "Demo staff profile for Sam Rivera: Development & systems. Explore their bio, skills, and approach.",
+    "bodyClass": "services-billboard-variant service-detail-page staff-profile-page",
+    "fragment": "about/team/sam-rivera/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/blog/a-clearer-website/",
+    "title": "A clearer website starts with better questions.",
+    "description": "Before colors, layouts, or clever effects, get clear on what your visitors actually need.",
+    "bodyClass": "services-billboard-variant service-detail-page blog-page blog-single-page",
+    "fragment": "blog/a-clearer-website/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/blog/",
+    "title": "Blog",
+    "description": "Practical notes on websites, automation, and dependable technology from Herr Systems.",
+    "bodyClass": "services-billboard-variant service-detail-page blog-page",
+    "fragment": "blog/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/blog/start-small-with-automation/",
+    "title": "Start small. Automate something useful.",
+    "description": "A practical way to choose your first automation without handing over the whole business.",
+    "bodyClass": "services-billboard-variant service-detail-page blog-page blog-single-page",
+    "fragment": "blog/start-small-with-automation/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/blog/what-good-hosting-should-cover/",
+    "title": "What should good website hosting cover?",
+    "description": "Go beyond disk space: the practical questions to ask about backups, updates, and ownership.",
+    "bodyClass": "services-billboard-variant service-detail-page blog-page blog-single-page",
+    "fragment": "blog/what-good-hosting-should-cover/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/case-studies/fieldnote-operations/",
+    "title": "Fieldnote Operations — Case study",
+    "description": "A human-reviewed intake concept for a small service business: collect the right context, prepare a useful draft, and keep the final decision with a person.",
+    "bodyClass": "services-billboard-variant service-detail-page case-page",
+    "fragment": "case-studies/fieldnote-operations/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/case-studies/",
+    "title": "Case studies",
+    "description": "Explore illustrative website and automation case studies, including strategy, interface examples, implementation choices, and handoff.",
+    "bodyClass": "services-billboard-variant service-detail-page case-page",
+    "fragment": "case-studies/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/case-studies/maple-street-workshop/",
+    "title": "Maple Street Workshop — Case study",
+    "description": "A service-led website concept for an independent furniture workshop, built around useful project details, thoughtful photography, and a better first conversation.",
+    "bodyClass": "services-billboard-variant service-detail-page case-page",
+    "fragment": "case-studies/maple-street-workshop/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/case-studies/northline-community/",
+    "title": "Northline Community — Case study",
+    "description": "A community-site concept that puts practical event information first and gives a volunteer team a manageable way to keep it current.",
+    "bodyClass": "services-billboard-variant service-detail-page case-page",
+    "fragment": "case-studies/northline-community/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/contact/",
+    "title": "Contact",
+    "description": "Start a conversation with Herr Systems. Share a project inquiry using our contact form, or email us directly.",
+    "bodyClass": "contact-page",
+    "fragment": "contact/content.html",
+    "scripts": [
+      "/inquiry-form.js?v=worker-ready-1",
+      "/contact.js?v=worker-ready-1"
+    ]
+  },
+  {
+    "route": "/pricing/",
+    "title": "Pricing",
+    "description": "Transparent $70 hourly pricing and an interactive sample project estimator for websites, ecommerce, AI automation, and hosting.",
+    "bodyClass": "services-billboard-variant pricing-page",
+    "fragment": "pricing/content.html",
+    "scripts": [
+      {
+        "src": "/pricing.js?v=services-3",
+        "type": "module"
+      },
+      {
+        "src": "/inquiry-form.js?v=worker-ready-1",
+        "type": "module"
+      }
+    ]
+  },
+  {
+    "route": "/services/billboard/",
+    "title": "Services — Billboard variant",
+    "description": "Herr Systems service directory: web design, development, hosting, and practical agentic setups.",
+    "bodyClass": "services-billboard-variant",
+    "fragment": "services/billboard/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/services/",
+    "title": "Services",
+    "description": "Herr Systems service directory: web design, development, hosting, agentic setups, consulting, and contract work.",
+    "bodyClass": "services-billboard-variant services-list-page",
+    "fragment": "services/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/services/web-design/",
+    "title": "Web Design",
+    "description": "Business-focused web design by Herr Systems. Explore responsive websites, clear page structure, accessible design, and a practical path from first idea to launch.",
+    "bodyClass": "services-billboard-variant service-detail-page",
+    "fragment": "services/web-design/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/services/development/",
+    "title": "Development",
+    "description": "Useful features, connected systems, and maintainable software. Build around the work your business actually needs to do—not a shopping list of technology.",
+    "bodyClass": "services-billboard-variant service-detail-page",
+    "fragment": "services/development/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/services/hosting/",
+    "title": "Hosting",
+    "description": "Hosting setup, sensible maintenance, and a clear plan for the things that can go wrong. Know what is covered, who owns the accounts, and where to turn for help.",
+    "bodyClass": "services-billboard-variant service-detail-page",
+    "fragment": "services/hosting/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/services/agentic-setups/",
+    "title": "Agentic Setups",
+    "description": "Focused assistants for repetitive work, with scoped access and human review where it matters. Start with one useful task—not an autonomous replacement for your judgment.",
+    "bodyClass": "services-billboard-variant service-detail-page",
+    "fragment": "services/agentic-setups/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/services/consulting/",
+    "title": "Consulting",
+    "description": "An independent review of your website, workflow, or proposed project. Understand the trade-offs and leave with decisions you can actually use.",
+    "bodyClass": "services-billboard-variant service-detail-page",
+    "fragment": "services/consulting/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/services/contract-work/",
+    "title": "Contract Work",
+    "description": "Scoped design and development support for agencies and teams. Clear responsibilities, reviewable work, and a handoff your existing team can use.",
+    "bodyClass": "services-billboard-variant service-detail-page",
+    "fragment": "services/contract-work/content.html",
+    "scripts": []
+  },
+  {
+    "route": "/templates/",
+    "title": "All templates",
+    "description": "Explore every brutalist template sample: homepage, services, case studies, blog, about, demo profiles, pricing, and contact.",
+    "bodyClass": "services-billboard-variant service-detail-page templates-page",
+    "fragment": "templates/content.html",
+    "scripts": []
+  }
+]
