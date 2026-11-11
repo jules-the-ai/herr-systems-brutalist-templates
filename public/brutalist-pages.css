@@ -317,3 +317,7 @@ html[data-theme=light] :where(body:not(.home-page)) main select{color-scheme:lig
 :where(body:not(.home-page)) main>.page-content{padding-bottom:48px}
 :where(body:not(.home-page)) main>.hero-band>.page-intro{padding-block:28px 32px}
 }
+
+/* Let the internal blue hero read as one uninterrupted surface. */
+:where(body:not(.home-page)) .masthead{border-bottom:0}
+:where(body:not(.home-page)) main>.hero-band>.page-intro{border-bottom:0}

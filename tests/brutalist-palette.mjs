@@ -52,6 +52,14 @@ export async function verifyPalette(page, {route, width, theme}) {
     const content = document.querySelector("main>.page-content");
     if (!content || content.getBoundingClientRect().width > 1801) failures.push("Body content lost its container");
     const hero = document.querySelector(".hero,.page-intro");
+    if (document.body.classList.contains("home-page")) {
+      if (document.querySelector(".ticker") || document.querySelector("main").textContent.includes("DESIGN WITH INTENT")) failures.push("Homepage ticker remains");
+      if (!document.querySelector(".page-content>:first-child")?.matches(".services")) failures.push("Services must follow homepage hero");
+    } else {
+      for (const e of [document.querySelector(".masthead"), hero]) {
+        if (getComputedStyle(e).borderBottomWidth !== "0px") failures.push(`Hero divider remains: ${e.className}`);
+      }
+    }
     const title = document.querySelector(".hero .fun,.page-intro h1");
     return {failures, minimum:Math.min(...ratios), hero:!!hero, title:getComputedStyle(title).color, theme:document.documentElement.dataset.theme, background:getComputedStyle(document.body).backgroundColor};
   });
