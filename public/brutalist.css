@@ -23,3 +23,10 @@
 .rate{box-shadow:none}
 .rate-top,.rate>a{border-color:var(--blue-line)}
 .rate-barcode{background:repeating-linear-gradient(90deg,var(--on-blue) 0 2px,transparent 2px 4px,var(--on-blue) 4px 5px,transparent 5px 9px,var(--on-blue) 9px 13px,transparent 13px 16px)}
+
+/* Full-width paint layers; their children retain the approved reading width. */
+.masthead-band,.hero-band{--fg:var(--on-blue);--muted:var(--on-blue);--line:var(--blue-line);background:var(--blue);color:var(--on-blue)}
+main#main{max-width:none}
+.hero-band>.hero,.page-content{max-width:1800px;margin-inline:auto}
+.masthead-band .masthead{margin-block:0}
+.masthead-band :is(a,button,summary):focus-visible{outline-color:var(--lime)}

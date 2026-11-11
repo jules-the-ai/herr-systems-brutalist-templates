@@ -307,3 +307,13 @@ html[data-theme=light] :where(body:not(.home-page)) main select{color-scheme:lig
 :where(body:not(.home-page)) main .profile-portrait img{box-shadow:none}
 :where(body:not(.home-page)) main .estimate-summary{margin-right:0}
 :where(body:not(.home-page)) main :is(.contact.panel,.profile-connect,.case-next) .button:hover{box-shadow:none}
+
+/* Break heroes out of the content gutters without viewport-width tricks or
+   horizontal overflow. Main remains the single accessible content landmark. */
+:where(body:not(.home-page)) main#main{padding:0}
+:where(body:not(.home-page)) main>.page-content{padding:0 var(--page-gutter) 80px}
+:where(body:not(.home-page)) main>.hero-band>.page-intro{max-width:1800px;margin-inline:auto;padding:42px var(--page-gutter) 56px}
+@media(max-width:600px){
+:where(body:not(.home-page)) main>.page-content{padding-bottom:48px}
+:where(body:not(.home-page)) main>.hero-band>.page-intro{padding-block:28px 32px}
+}

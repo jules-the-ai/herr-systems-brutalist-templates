@@ -72,7 +72,7 @@ try {
   const index = new Map();
   await mkdir("tests/results", { recursive: true });
   for (const route of pages) {
-    for (const width of [320, 375, 720, 1024, 1440]) {
+    for (const width of [320, 375, 720, 1024, 1440, 1920]) {
       await page.setViewportSize({ width, height: 1000 });
       await page.goto(origin + route);
       await page.evaluate(async () => {

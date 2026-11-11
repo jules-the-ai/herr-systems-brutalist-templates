@@ -6,7 +6,7 @@ export async function verifyPalette(page, {route, width, theme}) {
   const context = `${route} ${width} ${theme}`;
   const result = await page.evaluate(() => {
     const blue = "rgb(39, 46, 228)", lime = "rgb(191, 255, 68)";
-    const surfaces = [...document.querySelectorAll(".hero,.page-intro,.rate,.estimate-summary,.mobile-estimate,.detail-fit,.profile-skill-panel,.profile-facts,.case-callout,.article-takeaway,.detail-process-panel,.post-feature")];
+    const surfaces = [...document.querySelectorAll(".masthead-band,.hero,.page-intro,.rate,.estimate-summary,.mobile-estimate,.detail-fit,.profile-skill-panel,.profile-facts,.case-callout,.article-takeaway,.detail-process-panel,.post-feature")];
     const visible = e => e.getClientRects().length && getComputedStyle(e).visibility !== "hidden";
     const luminance = color => {
       const rgb = color.match(/[\d.]+/g).slice(0,3).map(Number).map(n => {n /= 255; return n <= .04045 ? n / 12.92 : ((n + .055) / 1.055) ** 2.4});
@@ -38,6 +38,19 @@ export async function verifyPalette(page, {route, width, theme}) {
     for (const e of document.querySelectorAll("main .service-entry")) {
       if (visible(e) && getComputedStyle(e).boxShadow !== "none") failures.push("Offset shadow behind service card");
     }
+    const headerBand = document.querySelector(".masthead-band");
+    const heroBand = document.querySelector("main>.hero-band");
+    for (const e of [headerBand, heroBand]) {
+      if (!e) { failures.push("Missing full-bleed band"); continue; }
+      const r = e.getBoundingClientRect();
+      if (Math.abs(r.left) > 1 || Math.abs(r.right - document.documentElement.clientWidth) > 1)
+        failures.push(`Inset blue band: ${e.className} ${r.left}..${r.right}`);
+      if (getComputedStyle(e).backgroundColor !== blue) failures.push(`Non-blue band: ${e.className}`);
+    }
+    if (headerBand && heroBand && Math.abs(headerBand.getBoundingClientRect().bottom - heroBand.getBoundingClientRect().top) > 1)
+      failures.push("Gap between menu and hero");
+    const content = document.querySelector("main>.page-content");
+    if (!content || content.getBoundingClientRect().width > 1801) failures.push("Body content lost its container");
     const hero = document.querySelector(".hero,.page-intro");
     const title = document.querySelector(".hero .fun,.page-intro h1");
     return {failures, minimum:Math.min(...ratios), hero:!!hero, title:getComputedStyle(title).color, theme:document.documentElement.dataset.theme, background:getComputedStyle(document.body).backgroundColor};
